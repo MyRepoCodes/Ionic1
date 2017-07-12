@@ -1,0 +1,7 @@
+{
+  	"name": "deals",
+ 	"app_id": "",
+	"serve": { 
+		"defaultBrowser": "chrome"
+	}
+}

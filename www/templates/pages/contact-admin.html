@@ -1,0 +1,94 @@
+<ion-header-bar class="pink-theme-color">
+  <h1 class="title">
+    <div class="inner-logo"> 
+      <img src="img/logo.png">
+    </div>
+  </h1>
+  <div class="buttons">
+    <button class="button pink-white-theme-color" ng-click="gotoLogin()">Login</button>
+  </div>
+</ion-header-bar>
+
+<ion-view view-title="Contact">
+  <ion-content>
+    <div class="list">
+      <form name="contactForm" class="contactForm" novalidate>
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : contactForm.firstname.$invalid && !contactForm.firstname.$pristine }">
+          <span class="input-label"><strong>First Name</strong></span>
+          <input type="text" placeholder="First Name"
+              name="firstname"
+              ng-model="user.firstname"
+              required>
+        </label>
+        <div class="form-error" ng-show="contactForm.firstname.$invalid && !contactForm.firstname.$pristine" >First Name is required
+        </div>
+
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label"><strong>Last Name</strong></span>
+          <input type="text" placeholder="Last Name"
+              name="lastname"
+              ng-model="user.lastname"
+              >
+        </label>
+
+
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : contactForm.phone.$invalid && !contactForm.phone.$pristine}">
+          <span class="input-label"><strong>Phone</strong></span>
+          <input type="number" placeholder="Phone" 
+              name="phone"
+              ng-model="user.phone"
+              required
+              >
+        </label>
+        <div class="form-error" ng-show="contactForm.phone.$invalid && !contactForm.phone.$pristine" >Enter valid phone number
+        </div>
+
+
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : contactForm.email.$invalid && !contactForm.email.$pristine }">
+          <span class="input-label"><strong>Email</strong></span>
+          <input  type="email" 
+                  placeholder="Email" 
+                  name="email"
+                  ng-model="user.email"
+                  required
+                  >
+        </label>
+        <div class="form-error" ng-show="contactForm.email.$invalid && !contactForm.email.$pristine" >Enter valid Email
+        </div>
+
+
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : contactForm.message.$invalid && !contactForm.message.$pristine }">
+          <span class="input-label"><strong>Your Message</strong></span>
+          <textarea rows="4" placeholder="Your Message" name="message" ng-model="user.message" required></textarea>
+        </label>
+        <div class="form-error" ng-show="contactForm.message.$invalid && !contactForm.message.$pristine" >Message shouldn't be empty 
+        </div>
+
+
+
+
+        <div class="item item-divider" ng-class="{ 'has-error' : contactForm.role.$invalid  && !contactForm.role.$pristine}"> 
+          <strong>Your Role</strong>
+        </div>        
+        <ion-radio name="role" ng-model="user.role" ng-value="'Personal'" required>Personal</ion-radio>
+        <ion-radio name="role" ng-model="user.role" ng-value="'Business'" required>Business</ion-radio>
+        <div class="form-error" ng-show="contactForm.role.$invalid && !contactForm.role.$pristine" >Please select your role
+        </div>
+
+
+
+        <div class="padding">
+          <button class="button button-block pink-white-theme-color" ng-disabled="contactForm.$invalid" ng-click="contact(user)">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+    
+  </ion-content>
+</ion-view>

@@ -1,0 +1,217 @@
+<ion-view view-title="Deal">
+  <ion-content class="has-tabs">
+
+  	<div class="list card" ng-if="deal.deal_owner._id==session_id && (deal.deal_publish=='0'||deal.deal_publish==0)">
+		<div class="item item-divider"> 
+	      	<i class="icon ion-alert-circled"></i> Alert! 
+	    </div>
+	    <div class="item">
+	    	<p>This is Deal is not Published.</p>
+	    	<p>You drafted this and saved for later.</p>
+	      	<!--button class="button button-popover button-stable" ng-click="changeDealStatus(deal._id, '1', 'Published')">
+	        	Publish This Deal
+	      	</button-->
+	      	<button class="button button-popover button-stable" ng-click="publishDeal()">
+	        	Publish This Deal
+	      	</button>
+	    </div>
+    </div>
+
+    <div class="list card">
+	  <div class="item item-avatar single-deal-avatar-head">
+	    <img src="{{dealImagePath}}{{deal.deal_photo}}" err-src="./img/noimage2.png" >
+	    <h2 class="deal-name">{{ deal.deal_name }}</h2>
+	    <p>by <span class="deal-owner-name-single-deal">{{deal.deal_owner.first_name + ' ' + deal.deal_owner.last_name}}</span></p>
+	    
+	    <span ng-if="deal.deal_price != null && deal.deal_price != '0'" class="single-deal-price"><i class="icon ion-social-usd"></i> {{ deal.deal_price }}</span>
+	    <span ng-if="deal.deal_price == null || deal.deal_price == '0'" class="single-deal-price">Offer!</span>
+
+	  </div>
+
+	  <div class="item item-body">
+	  	<h2  ng-if="deal.deal_photo">{{deal.deal_name}}</h2>	  	
+	    <img  ng-if="deal.deal_photo" class="full-image" src="{{dealImagePath}}{{deal.deal_photo}}" err-src="./img/noimage2.png" >
+	    
+        <div class="deal-price-n-rating">             
+	        <!--onlyrating ng-model="data.rating" max="data.max"></onlyrating-->
+			<div class="only-rating-stars" ng-click="rate(1)">
+				<span class="rated-stars-single-deal"><i class="icon ion-star assertive" ng-repeat="n in [] | ratingstar:ratedstars"></i></span>
+				<span class="unrated-stars-single-deal"><i class="icon ion-ios-star-outline assertive" ng-repeat="n in [] | ratingstar:unratedstars"></i></span>
+			</div>
+			<div class="only-flag-deal">
+				<a ng-click="flag(deal._id)"><i class="icon ion-ios-flag pink-colo-font"></i> Flag It!</a>
+			</div>
+		</div>         
+		<!--p><rating ng-model="data.rating" max="data.max"></rating></p-->
+	    	    
+	    <div class="card inner-deal-card">
+		  <div class="item item-text-wrap">
+		    <strong>Posted On:</strong> {{deal.deal_created | time}}
+		  </div>
+		</div>
+
+	    <div ng-if="distanceFromHere" class="card inner-deal-card">
+		  <div class="item item-text-wrap">
+		    <strong>Away from my location:</strong> {{distanceFromHere | number:2}} KM
+		  </div>
+		</div>
+
+	    <div class="card inner-deal-card">
+		  <div class="item item-text-wrap">
+		    <strong>Validity:</strong> {{deal.deal_from | date : 'MMM d, y H:mm:ss' : 'UTC'}}  to {{deal.deal_to | date : 'MMM d, y H:mm:ss' : 'UTC'}}
+		    <!--strong>Validity:</strong> {{deal.deal_from | time}} at {{deal_from_time}} to {{deal.deal_to | time}} at {{deal_to_time}}-->
+		  </div>
+		</div>
+	    
+	    <div class="card inner-deal-card" ng-if="deal.deal_link != '' && deal.deal_link != 'undefined'">
+		  <div class="item item-text-wrap">
+		    <strong>Link:</strong> <a ng-click="openLink(deal.deal_link)" href="">{{deal.deal_link}}</a>
+		  </div>
+		</div>
+
+	    <div class="card inner-deal-card" ng-if="deal.deal_description != '' && deal.deal_description != 'undefined'">
+		  <div class="item item-text-wrap">
+		    <strong>Description:</strong> {{deal.deal_description}}
+		  </div>
+		</div>
+
+	    <div class="card inner-deal-card">
+		  <div class="item item-text-wrap">
+		    <strong>Location of Deal:</strong> {{biz_address}}	
+		    {{deal.deal_country}} -  	
+		    <span ng-if="deal.deal_location_type=='national'">
+
+		    National
+		 </span>
+
+		    
+		  </div>
+		</div>
+		<div id="googleMap" data-tap-disabled="true" style="height:300px;"></div>
+		<div class="item" ng-if="deal.deal_location_type!='national'">
+          	<button class="button button-popover button-stable" id="routebtn" value="route" ><i class="icon ion-map"></i> Show Route </button>
+        </div>	
+	    
+	    <p ng-if="deal.deal_video != '' && deal.deal_video != 'undefined'">
+	    	<iframe class="youtube-player" type="text/html" width="100%" height="240" ng-src="{{trustSrc(deal.deal_video)}}" allowfullscreen frameborder="0"></iframe> 
+	    </p>
+
+	    <p>
+	      <a href="#" class="subdued">{{sharesCount}} Share</a>
+	      <a href="#" class="subdued">{{reviewsCount}} Reviews</a>
+	    </p>
+	  </div>
+
+	  <div class="item tabs tabs-secondary tabs-icon-left">
+	    <a class="tab-item" ng-click="rate(1)">
+	      <i class="icon ion-thumbsup"></i>
+	      Rate
+	    </a>
+	    <a class="tab-item" ng-click="rate(2)">
+	      <i class="icon ion-chatbox"></i>
+	      Review
+	    </a>
+	    <a class="tab-item" ng-click="share(deal._id, deal.deal_short_desc, deal.deal_name, '', '')">
+	      <i class="icon ion-share"></i>
+	      Share
+	    </a>
+	  </div>
+
+	</div>
+
+	<div class="list card single-deal-list-card" ng-if="deal.deal_owner._id==session_id">
+
+		<div class="item item-divider">
+	      	Package History
+	    </div>
+       <div ng-repeat="packages in deal.packagedetails">
+        <a class="item item-icon-left" ng-if="packages.credit_use">
+	        <i class="icon ion-ios-arrow-right" ></i>
+	        <span ng-if="packages.credit_use"> {{packages.package_name}}</span>
+	        <span class="badge badge-dark">{{packages.credit_use}} Hour</span>
+      	</a>     
+        </div>
+      	
+
+    </div>
+
+
+	<div class="list card single-deal-list-card" ng-if="deal.deal_owner._id==session_id">
+
+		<div class="item item-divider">
+	      	Deal Performance
+	    </div>
+
+      	<a class="item">
+	        <i class="icon ion-chevron-right"></i>
+	        Rating ({{dealCountData.ratingcount}} {{dealCountData.ratingcount>1?'Users':'User' }})
+	        <span class="badge badge-dark">
+	        	<div class="only-rating-stars">
+					<span class="rated-stars-single-deal"><i class="icon ion-star assertive" ng-repeat="n in [] | ratingstar:ratedstars"></i></span>
+					<span class="unrated-stars-single-deal"><i class="icon ion-ios-star-outline assertive" ng-repeat="n in [] | ratingstar:unratedstars"></i></span>
+				</div>
+			</span>
+      	</a>
+
+      	<a class="item item-icon-left item-icon-right">
+	        <i class="icon ion-ios-arrow-right"></i>
+	        Total Amount
+	        <span class="badge badge-dark" ng-if="deal.deal_salevalue">
+	       	{{formatNumber(deal.deal_salevalue)}}  </span>
+	        <span class="badge badge-dark" ng-if="!deal.deal_salevalue">0 Hour</span>
+      	</a>
+
+      	<a class="item item-icon-left">
+	        <i class="icon ion-ios-arrow-right"></i>
+	        Total Views
+	        <span class="badge badge-dark">{{dealCountData.tcount[0].total}} Views</span>
+      	</a>     
+
+      	<a class="item item-icon-left">
+        	<i class="icon ion-ios-arrow-right"></i>
+        	Unique Views
+        	<span class="badge badge-dark">{{dealCountData.ucount}} Views</span>
+      	</a>     
+
+      	<a class="item item-icon-left">
+	        <i class="icon ion-ios-arrow-right"></i>
+	        Total Shares
+	        <span class="badge badge-dark">{{deal.deal_share_count}} Shares</span>
+      	</a>
+
+      	<a class="item item-icon-left">
+	        <i class="icon ion-ios-arrow-right"></i>
+	        Total Reviews
+	        <span class="badge badge-dark">{{deal.deal_review_count}} Reviews</span>
+      	</a>
+
+    </div>
+
+
+	<div class="list card" ng-if="deal.deal_owner._id==session_id">
+
+		<div class="item item-divider">
+	      	Rate Deal Performance
+	    </div>
+
+	    <ion-list>
+          	<ion-radio ng-model="ratePerformance.rating" ng-value="'Excellent'">Excellent</ion-radio>
+          	<ion-radio ng-model="ratePerformance.rating" ng-value="'Good'">Good</ion-radio>
+          	<ion-radio ng-model="ratePerformance.rating" ng-value="'Average'">Average</ion-radio>
+          	<ion-radio ng-model="ratePerformance.rating" ng-value="'Not as Expected'">Not as Expected</ion-radio>
+        </ion-list>
+
+      	<label class="item item-input item-stacked-label">
+          	<span class="input-label"><Strong>Your comment</Strong></span>
+          	<textarea ng-model="ratePerformance.comment" placeholder="Write your comment here..." ></textarea>
+        </label>
+
+      	<div class="item">
+          	<button class="button button-popover button-stable" ng-click="submitDealRatingPerformance(ratePerformance)">
+            	Submit Your Experience
+          	</button>
+        </div>
+    </div>
+
+  </ion-content>
+</ion-view>

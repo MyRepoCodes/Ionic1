@@ -1,0 +1,55 @@
+<ion-header-bar class="pink-theme-color">
+  <h1 class="title">
+    <div class="inner-logo"> 
+      <img src="img/logo.png">
+    </div>
+  </h1>
+</ion-header-bar>
+
+<ion-view view-title="Sign-In">
+  <ion-content>
+    <form name="signInForm" ng-submit="signIn(user)" novalidate>
+      <div class="list">
+
+        <label class="item item-input" ng-class="{ 'has-error' : signInForm.email.$invalid && !signInForm.email.$pristine }">
+            <span class="input-label">Email</span>
+            <input  type="email" 
+                  placeholder="Email" 
+                  name="email"
+                  ng-model="user.email"
+                  
+                  required
+                  >
+        </label>
+        <div class="form-error" ng-show="signInForm.email.$invalid && !signInForm.email.$pristine" >Enter a valid email.
+        </div>
+
+
+        <label class="item item-input" ng-class="{ 'has-error' : signInForm.password.$invalid && !signInForm.password.$pristine }">
+          <span class="input-label">Password</span>
+          <input  type="password" 
+                  placeholder="Password"
+                  name="password"
+                  ng-model="user.password"
+                  required
+                  >
+        </label>
+         <div class="form-error" ng-show="signInForm.password.$invalid && !signInForm.password.$pristine" >Enter a valid password.
+        </div>
+
+
+      </div>
+      <div class="padding">
+        <button class="button button-block button-login" type="submit" ng-disabled="signInForm.$invalid">
+          Sign-In
+        </button>
+        <p class="text-center">
+          <a href="#/forgot-password">Forgot password</a>
+        </p>
+        <p class="text-center">
+          <a href="#/register">Not a member yet?</a>
+        </p>
+      </div>
+    </form>    
+  </ion-content>
+</ion-view>

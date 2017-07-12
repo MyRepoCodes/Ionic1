@@ -1,0 +1,179 @@
+<ion-header-bar class="pink-theme-color">
+  <h1 class="title">
+    <div class="inner-logo"> 
+      <img src="img/logo.png">
+    </div>
+  </h1>
+  <div class="buttons">
+    <button class="button pink-white-theme-color" ng-click="gotoLogin()">Login</button>
+  </div>
+</ion-header-bar>
+
+<ion-view view-title="Register">
+  <ion-content>
+    <div class="list">
+      <form name="signupForm" class="signupForm" novalidate>
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : signupForm.firstname.$invalid && !signupForm.firstname.$pristine }">
+          <span class="input-label"><strong>First Name</strong></span>
+          <input type="text" placeholder="First Name"
+              name="firstname"
+              ng-model="user.firstname"
+              required>
+        </label>
+        <div class="form-error" ng-show="signupForm.firstname.$invalid && !signupForm.firstname.$pristine" >First Name is required
+        </div>
+
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label"><strong>Last Name</strong></span>
+          <input type="text" placeholder="Last Name"
+              name="lastname"
+              ng-model="user.lastname"
+              >
+        </label>
+
+
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : signupForm.phone.$invalid && !signupForm.phone.$pristine}">
+          <span class="input-label"><strong>Phone</strong></span>
+          <input type="number" placeholder="Phone" 
+              name="phone"
+              ng-model="user.phone"
+              required
+              >
+        </label>
+        <div class="form-error" ng-show="signupForm.phone.$invalid && !signupForm.phone.$pristine" >Enter valid phone number
+        </div>
+
+
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : signupForm.email.$invalid && !signupForm.email.$pristine }">
+          <span class="input-label"><strong>Email</strong></span>
+          <input  type="email" 
+                  placeholder="Email" 
+                  name="email"
+                  ng-model="user.email"
+                  required
+                  >
+        </label>
+        <div class="form-error" ng-show="signupForm.email.$invalid && !signupForm.email.$pristine" >Enter valid Email
+        </div>
+
+
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : signupForm.password.$invalid && !signupForm.password.$pristine}">
+          <span class="input-label"><strong>Password</strong></span>
+          <input  type="password" placeholder="Password"
+                  name="password"
+                  ng-model="user.password"
+                  required
+                  >
+        </label>
+        <div class="form-error" ng-show="signupForm.password.$invalid && !signupForm.password.$pristine" >Password is required
+        </div>
+
+
+
+        <div class="item item-divider"> 
+          <strong>Gender</strong>
+        </div>
+        <ion-radio name="gender" ng-model="user.gender" ng-value="'m'">Male</ion-radio>
+        <ion-radio name="gender" ng-model="user.gender" ng-value="'f'">Female</ion-radio>
+
+
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : signupForm.zip.$invalid && !signupForm.zip.$pristine}">
+          <span class="input-label"><strong>Zip Code</strong></span>
+          <input  type="number" placeholder="Residence Zip Code" 
+                  name="zip"
+                  ng-model="user.zip"
+                  required
+                  >
+        </label>        
+        <div class="form-error" ng-show="signupForm.zip.$invalid && !signupForm.zip.$pristine" >Please provide valid ZIP Code
+        </div>
+
+
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label"><strong>DOB</strong></span>
+          <input type="date" ng-model="user.dob" placeholder="Date Of Birth">
+        </label>
+
+
+
+        <div class="item item-divider" ng-class="{ 'has-error' : signupForm.role.$invalid  && !signupForm.role.$pristine}"> 
+          <strong>Role</strong>
+        </div>        
+        <ion-radio name="role" ng-model="user.role" ng-value="'2'" required>Looking for best Deals near by you?</ion-radio>
+        <ion-radio name="role" ng-model="user.role" ng-value="'1'" required>Are you a small business owner that may offer deals?</ion-radio>
+        <div class="form-error" ng-show="signupForm.role.$invalid && !signupForm.role.$pristine" >Please select your role
+        </div>
+
+
+        <div class="item item-button-right">
+          <Strong>Upload Picture</Strong>
+          
+          <button class="button pink-white-theme-color" ng-click="takePic()" id="uploadProfilePicButton">Upload</button>
+          <!--button class="button pink-white-theme-color" ng-click="upload()" id="uploadProfilePicButton">
+            Upload
+          </button>
+
+          <button class="button pink-white-theme-color" 
+          ngf-select 
+          ng-model="file" 
+          name="file" 
+          ngf-pattern="'image/*'" 
+          accept="image/*" 
+          ngf-max-size="20MB" 
+          ngf-min-height="100" 
+          ngf-resize="{width: 100, height: 100}">Upload</button>
+
+          <input  type="file" 
+                  ngf-select 
+                  ng-model="file" 
+                  name="file"    
+                  accept="image/*" 
+                  ngf-max-size="2MB" 
+                  required-->
+
+        </div>
+        <div class="padding">
+          <img src="../img/logo.png" id="myImage2" width="100" height="100" style="display:none" >
+        </div>
+
+
+        <div class="item item-divider" ng-class="{ 'has-error' : signupForm.agree.$invalid}">
+        <div class="item item-checkbox">
+           <label class="checkbox">
+             <input type="checkbox"
+                    name="agree"
+                    ng-model="user.agree"
+                    required
+                    >
+           </label>
+           Agree to Terms & Conditions
+        </div>
+        <div class="form-error" ng-show="signupForm.agree.$invalid && !signupForm.agree.$pristine" >You must have to agree to our terms
+        </div>
+
+
+
+        <div class="padding">
+          <button class="button button-block pink-white-theme-color" ng-disabled="signupForm.$invalid" ng-click="signup(user)">
+            Register
+          </button>
+          <!--input type="hidden" id="lat">
+          <input type="hidden" id="long"-->
+        </div>
+        <!--div class="padding">
+          <button class="button button-block pink-white-theme-color" type="submit" ng-click="submit(file)">
+            Just Upload
+          </button>
+        </div-->
+      </form>
+    </div>
+    
+  </ion-content>
+</ion-view>

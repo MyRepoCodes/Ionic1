@@ -1,0 +1,28 @@
+<ion-view view-title="History" cache-view="false" >
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals     
+    </a>
+  </ion-nav-buttons>
+  <ion-content class="has-tabs account-page">
+
+    <div ng-repeat="credit in credits">
+      <div class="item item-divider">
+        {{credit.credit_created | date}}
+      </div>
+      <div class="list">
+        <div class="card">
+          <div class="item item-text-wrap">
+            <strong>Package:</strong> {{credit.credit_package[0].package_name}}<br>
+            <strong>Amount Paid:</strong> ${{credit.credit_bought}}<br>
+            <strong>Total Hours:</strong> {{credit.credit_balance}} Hour<br>
+            <strong>Status:</strong> {{credit.credit_status}}<br>
+            <strong>Mode:</strong> {{credit.credit_mode}}<br>
+            <strong>Transaction:</strong> {{credit.credit_transaction}}<br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

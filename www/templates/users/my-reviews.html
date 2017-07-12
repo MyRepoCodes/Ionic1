@@ -1,0 +1,37 @@
+<ion-view view-title="My Reviews" cache-view="false" >
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals     
+    </a>
+  </ion-nav-buttons>
+  <ion-content class="has-tabs">
+    <ion-list 
+        show-delete="shouldShowDelete"
+        show-reorder="shouldShowReorder"
+        can-swipe="listCanSwipe">
+      <ion-item ng-repeat="review in reviews"
+                class="item item-icon-left item-icon-right">
+        <i class="icon ion-chatbox-working"></i>
+        {{review.review}}
+        <span class="item-note">
+          On {{review.created | time}}
+        </span>
+        <!--ion-option-button 
+            class="button-assertive"
+            ng-click="reviews.splice($index, 1)"-->
+        <ion-option-button 
+            class="button-assertive"
+            ng-click="deleteMyReveiw(review._id, $index)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+    <div class="row responsive-sm">
+      <div class="col">
+        <h2 ng-show="!reviews.length" class="nothing-found-block">
+          <i class="icon ion-android-alert"></i> No Review Found!
+        </h2>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

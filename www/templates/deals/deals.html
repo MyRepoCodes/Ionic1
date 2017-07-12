@@ -1,0 +1,141 @@
+<ion-view view-title="Deals" hide-back-button="true" cache-view="false">
+  
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-dark ion-ios-search" ng-click="popover.show($event)">      
+    </button>
+  </ion-nav-buttons>
+
+  <div class="bar bar-subheader bar-local-national-nav">
+    <h2 class="title national-nav"><a href="#/app/national-deals"><i class="icon ion-earth"></i> National</a></h2>
+    <h2 class="title local-nav"><a href="#/app/local-deals"><i class="icon ion-location"></i> Local</a></h2>
+  </div>
+
+  <ion-content class="has-subheader has-tabs" drag-content="false">
+    <ion-list
+          show-delete="shouldShowDelete"
+          show-reorder="shouldShowReorder"
+          can-swipe="listCanSwipe">
+      <div class="item item-divider">
+        Active Deals ({{deals.length}})
+
+      </div>
+      <ion-item ng-repeat="deal in deals track by $index"
+                class="item-thumbnail-left"
+                deal="deal">
+                <!--href="#/app/deals/{{deal._id}}"-->
+        
+          <img ng-src="{{dealImagePath}}{{deal.deal_photo}}" err-src="./img/noimage2.png" ng-click="view(deal._id)" >
+
+          <div class="single-deal-head">
+            <div class="single-deal-head-left-block">
+              <h2 ng-click="view(deal._id)">{{deal.deal_name}} ({{deal.deal_location_type | uppercase}})</h2>
+              <p>by <span class="deal-owner-name">{{deal.deal_owner.first_name + ' ' + deal.deal_owner.last_name}}</span></p>
+            </div> 
+            <div class="single-deal-head-right-block">
+              <p class="deal-price" >
+                <span class="rated-stars">
+                  <i class="icon ion-star assertive" ng-repeat="n in [] | ratingstar:deal.deal_rating_count"></i>
+                </span>
+                <span class="unrated-stars">
+                  <i class="icon ion-ios-star-outline assertive" ng-repeat="n in [] | ratingstar:5-deal.deal_rating_count"></i>
+                </span>
+              </p>
+              <p ng-if="deal.deal_price != null && deal.deal_price != '0'" class="deal-price" >${{deal.deal_price}}</p>
+              <p ng-if="deal.deal_price == null || deal.deal_price == '0'" class="deal-price" >Offer!</p>
+            </div>
+          </div>
+          
+          
+          <p class="deal-short-description">{{deal.deal_short_desc}}</p>
+            
+            <div class="row deal-sharing-n-review">
+              <div class="col col-66 deal-rating">
+                {{deal.deal_review_count}} Reviews
+              </div>
+              <div class="col col-33 deal-sharing" ng-click="shareDeal(deal._id, deal.deal_owner._id, 'all', deal.deal_short_desc, deal.deal_name, '', '')">
+                <i class="icon ion-social-facebook positive"></i>
+                <i class="icon ion-social-twitter calm"></i>
+                <i class="icon ion-social-googleplus assertive"></i>
+              </div>
+            </div>
+          <ion-option-button class="button-positive"
+                             ng-click="share(deal._id, deal.deal_owner._id, 'all', deal.deal_short_desc, deal.deal_name, '', '')">
+            Share
+          </ion-option-button>
+          <ion-option-button class="button-info"
+                             ng-click="view(deal._id)">
+            View
+          </ion-option-button>        
+      </ion-item>
+      <div class="item item-divider">
+        Upcoming Deals ({{futuredeals.length}})
+      </div>
+      <ion-item ng-repeat="deal in futuredeals track by $index"
+                class="item-thumbnail-left"
+                deal="deal">
+                <!--href="#/app/deals/{{deal._id}}"-->
+       
+          <img ng-src="{{dealImagePath}}{{deal.deal_photo}}" err-src="./img/noimage2.png" ng-click="view(deal._id)" >
+
+          <div class="single-deal-head">
+            <div class="single-deal-head-left-block">
+              <h2 ng-click="view(deal._id)">{{deal.deal_name}} ({{deal.deal_location_type | uppercase}}) </h2>
+              <p>by <span class="deal-owner-name">{{deal.deal_owner.first_name + ' ' + deal.deal_owner.last_name}}</span></p>
+            </div> 
+            <div class="single-deal-head-right-block">
+              <p class="deal-price" >
+                <span class="rated-stars">
+                  <i class="icon ion-star assertive" ng-repeat="n in [] | ratingstar:deal.deal_rating_count"></i>
+                </span>
+                <span class="unrated-stars">
+                  <i class="icon ion-ios-star-outline assertive" ng-repeat="n in [] | ratingstar:5-deal.deal_rating_count"></i>
+                </span>
+              </p>
+              <p ng-if="deal.deal_price != null && deal.deal_price != '0'" class="deal-price" >${{deal.deal_price}}</p>
+              <p ng-if="deal.deal_price == null || deal.deal_price == '0'" class="deal-price" >Offer!</p>
+            </div>
+          </div>
+          
+          
+          <p class="deal-short-description">{{deal.deal_short_desc}}</p>
+            
+            <div class="row deal-sharing-n-review">
+              <div class="col col-66 deal-rating">
+                {{deal.deal_review_count}} Reviews
+              </div>
+              <div class="col col-33 deal-sharing" ng-click="shareDeal(deal._id, deal.deal_owner._id, 'all', deal.deal_short_desc, deal.deal_name, '', '')">
+                <i class="icon ion-social-facebook positive"></i>
+                <i class="icon ion-social-twitter calm"></i>
+                <i class="icon ion-social-googleplus assertive"></i>
+              </div>
+            </div>
+          <ion-option-button class="button-positive"
+                             ng-click="share(deal._id, deal.deal_owner._id, 'all', deal.deal_short_desc, deal.deal_name, '', '')">
+            Share
+          </ion-option-button>
+          <ion-option-button class="button-info"
+                             ng-click="view(deal._id)">
+            View
+          </ion-option-button>        
+      </ion-item>
+    </ion-list>
+
+    <!--ion-infinite-scroll
+      on-infinite="loadMore(page)"
+      distance="1%"      
+      ng-hide="!deals.length">
+    </ion-infinite-scroll-->
+
+    <!--ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>-->
+
+    <div class="row responsive-sm">
+      <div class="col">
+        <h1 ng-show="deals.length ==0 && futuredeals.length==0" class="nothing-found-block">
+          <i class="icon ion-android-alert"></i> No Deals Listed!
+        </h1>
+      </div>
+    </div>
+    
+
+  </ion-content>
+</ion-view>

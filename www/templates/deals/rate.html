@@ -1,0 +1,25 @@
+<ion-modal-view class="rate-modal">
+  <ion-header-bar class="pink-white-theme-color">
+    <h1 class="title">Rate! This Deal</h1>
+    <div class="buttons">
+      <button class="button button-outline close-button" ng-click="closeLogin(1)">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+
+    <form ng-submit="postRating()" >
+      <div class="list">
+        <p class="item item-input">
+          <rating ng-model="data.rating" max="data.max"></rating>
+        </p>
+        <p class="item item-input">
+          {{rateValue}}
+        </p>
+
+        <label class="item">
+          <button class="button button-block button-login" type="submit">RATE IT!</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

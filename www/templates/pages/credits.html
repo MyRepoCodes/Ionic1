@@ -1,0 +1,70 @@
+<ion-view view-title="Buy Hours" cache-view="false" >
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals     
+    </a>
+  </ion-nav-buttons>
+  <ion-content class="has-tabs account-page">
+
+
+    <div class="item item-divider">
+      My Current Hour Status
+    </div>
+    <div class="list">
+
+      <a class="item item-icon-left" href="#/app/credits-history">
+        <i class="icon ion-cash"></i>
+        (Latest)Total Hours Bought
+        <span class="badge badge-balanced custom-badge">({{purchaseHistory[0].credit_balance}} HRS / ${{purchaseHistory[0].credit_bought}})</span>
+
+      </a>
+
+      <a class="item item-icon-left" href="#/app/credits-history">
+        <i class="icon ion-cash"></i>
+        Total Hours Bought
+        <span class="badge badge-balanced custom-badge" ng-if="credits.credit_remain_amount">({{credits.credit_balance}} HRS / ${{credits.credit_bought}})</span>
+        <span class="badge badge-balanced" ng-if="!credits.credit_remain_amount">0 Hour</span>
+      </a>
+
+
+      <a class="item item-icon-left item-icon-right" href="#/app/credits-used-history">
+        <i class="icon ion-ios-briefcase"></i>
+        Used Hours so far...
+        <span class="badge badge-balanced custom-badge" ng-if="credits.credit_used_amount">({{credits.credit_used_amount}} HRS / ${{totalSaleValue}})<!--{{credits.credit_used_amount - credits.credit_remain_amount}}--></span>
+        <span class="badge badge-balanced custom-badge" ng-if="!credits.credit_used_amount">0 Hour</span>
+      </a>
+
+      <a class="item item-icon-left">
+        <i class="icon ion-card"></i>
+        Current Hour Bal.
+        <span class="badge badge-balanced custom-badge" ng-if="credits.credit_remain_amount">({{credits.credit_remain_amount}} HRS/  ${{credits.credit_bought - totalSaleValue | number: 1}})</span>
+        <span class="badge badge-balanced custom-badge" ng-if="!credits.credit_remain_amount">0 Hour</span>
+      </a>
+      
+    </div>
+
+
+    <div class="item item-divider">
+      Buy Hours ($1 for {{credit_formula}} Hour) <!--i class="icon ion-card"></i-->
+    </div>
+    <div class="list packages-listing">
+
+      <div class="row" ng-repeat="package in packages">
+        <div class="col col-25">
+          {{package.package_name}}
+        </div>
+        <div class="col col-20">
+          ${{package.package_amount}}
+        </div>
+        <div class="col col-33">
+          {{package.package_deal}} <span ng-if="package.package_deal != package.package_total_hour">+ {{package.package_total_hour - package.package_deal}} Free</span> <span ng-if="package.package_deal == package.package_total_hour">Hours</span> 
+        </div>
+        <div class="col col-20">
+          <button class="button button-outline button-block button-login buy-credit-button" ng-click="buyCredits(package._id)">Buy</button>
+          <!--a class="button button-outline button-block button-login buy-credit-button" href="#/app/buy-credits/{{package._id}}">Buy</a-->
+        </div>
+      </div>
+      
+    </div>
+  </ion-content>
+</ion-view>

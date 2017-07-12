@@ -1,0 +1,40 @@
+<ion-modal-view class="share-modal">
+  <ion-header-bar class="pink-white-theme-color">
+    <h1 class="title">Share! This Deal</h1>
+    <div class="buttons">
+      <button class="button button-outline close-button" ng-click="closeModal()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="row responsive-sm social-icons-modal">
+      <div class="col">
+        <h2 class="light"><i class="icon ion-ios-undo light"></i> Share</h2>
+      </div>
+      <div class="col">
+        <button class="button button-calm" ng-click="share(shareDealId, shareDealOwner, 'tw', shareDealmessage, shareDealsubject, shareDealfile, shareDeallink)">
+          <i class="icon ion-social-twitter light"></i> via Twitter
+        </button>
+      </div>
+      <div class="col">
+        <button class="button button-positive" ng-click="share(shareDealId, shareDealOwner, 'fb', shareDealmessage, shareDealsubject, shareDealfile, shareDeallink)">
+          <i class="icon ion-social-facebook light"></i> via Facebook
+        </button>
+      </div>
+      <div class="col">
+        <button class="button button-assertive" ng-click="share(shareDealId, shareDealOwner, 'gp', shareDealmessage, shareDealsubject, shareDealfile, shareDeallink)">
+          <i class="icon ion-social-googleplus light"></i> via Google+
+        </button>
+      </div>
+      <div class="col">
+        <button class="button button-energized" ng-click="share(shareDealId, shareDealOwner, 'insta', shareDealmessage, shareDealsubject, shareDealfile, shareDeallink)">
+          <i class="icon ion-social-instagram light"></i> via Instagram
+        </button>
+      </div>
+      <div class="col">
+        <button class="button button-balanced" ng-click="share(shareDealId, shareDealOwner, 'wp', shareDealmessage, shareDealsubject, shareDealfile, shareDeallink)">
+          <i class="icon ion-social-whatsapp light"></i> via WhatsApp
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

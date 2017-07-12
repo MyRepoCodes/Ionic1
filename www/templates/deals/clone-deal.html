@@ -1,0 +1,328 @@
+<ion-view view-title="Clone Deal" cache-view="false">  
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals     
+    </a>
+  </ion-nav-buttons>
+    
+  <div class="bar bar-subheader bar-local-national-nav">
+    <h2 class="title" ng-if="credits.credit_remain_amount">Current Bal. {{credits.credit_remain_amount}} Hour</h2>
+    <h2 class="title" ng-if="!credits.credit_remain_amount">Current Bal. 0 Hour</h2>
+ 
+  </div>
+
+
+  <ion-content class="has-subheader has-tabs" drag-content="false">
+    <div class="list create-deal">
+      <form name="createDealForm" class="createDealForm" novalidate>
+
+        <label class="item item-input item-stacked-label item-stacked-label-grey" ng-class="{ 'has-error' : createDealForm.dealName.$invalid && !createDealForm.dealName.$pristine }">
+          <span class="input-label"><Strong>Deal Title<span class="assertive"> *</span></Strong></span>
+          <input type="text" name="dealName" ng-model="deal.deal_name" placeholder="e.g. 20% off on Medium Onion Pizza" required>
+        </label>
+        <div class="form-error" ng-show="createDealForm.dealName.$invalid && !createDealForm.dealName.$pristine" >Deal Title is required
+        </div>
+
+        <label class="item item-input item-select" ng-class="{ 'has-error' : createDealForm.dealCat.$invalid && !createDealForm.dealCat.$pristine }">
+          <span class="input-label"><Strong>Deal Category<span class="assertive"> *</span></Strong></span>
+          <select name="dealCat" ng-model="deal.dealCat" required>
+            <option ng-repeat="dealCategory in dealMenuCategories" value="{{dealCategory._id}}">{{dealCategory.category_name}}</option>
+          </select>
+        </label>
+        <div class="form-error" ng-show="createDealForm.dealCat.$invalid && !createDealForm.dealCat.$pristine" >Deal Category is required
+        </div>
+
+
+        <!--div class="item item-divider"> 
+          <Strong>Deal Type</Strong>
+        </div>
+        <ion-radio name="dealType" ng-model="deal.dealType" value='paid' >Paid</ion-radio>
+        <ion-radio name="dealType" ng-model="deal.dealType" value='free' >Free (Offer Based)</ion-radio>
+
+        <div ng-show="deal.dealType == 'paid'">
+          <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : createDealForm.price.$invalid && !createDealForm.price.$pristine }">
+          <span class="input-label"><Strong>Deal Price</Strong></span>
+            <input type="number" name="price" ng-model="deal.deal_price" placeholder="e.g. $49">
+          </label>
+          <div class="form-error" ng-show="createDealForm.price.$invalid && !createDealForm.price.$pristine" >Price Should be Valid
+          </div>
+        </div-->
+
+        <div class="item item-divider"> 
+          <Strong>Deal Type<span class="assertive"> *</span></Strong>
+        </div>
+        <ion-radio name="deal_location_type" ng-model="deal.deal_location_type" value='local' required>Local</ion-radio>
+        <ion-radio name="deal_location_type" ng-model="deal.deal_location_type" value='national' required>National</ion-radio>
+
+        <div ng-show="deal.deal_location_type == 'national'">
+          <label class="item item-input item-select item-stacked-label-grey" >
+            <span class="input-label"><Strong>Select Country</Strong></span>
+            <select ng-model="deal.deal_country"  name="deal.deal_country">
+              <option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
+            </select>
+          </label> 
+        </div>
+
+        <!--div ng-show="deal.deal_national_type == 'paid'">
+          <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : createDealForm.price.$invalid && !createDealForm.price.$pristine }">
+          <span class="input-label"><Strong>Deal Price</Strong></span>
+            <input type="number" name="price" ng-model="deal.deal_price" placeholder="e.g. $49">
+          </label>
+          <div class="form-error" ng-show="createDealForm.price.$invalid && !createDealForm.price.$pristine" >Price Should be Valid
+          </div>
+        </div-->
+        
+
+
+        
+
+        <label class="item item-input item-stacked-label item-stacked-label-grey" ng-class="{ 'has-error' : createDealForm.shortDescription.$invalid && !createDealForm.shortDescription.$pristine }">
+          <span class="input-label"><Strong>Deal Description<span class="assertive"> *</span></Strong></span>
+          <textarea  name="shortDescription" ng-model="deal.deal_short_desc" placeholder="e.g. Get off on pizza before 2PM today" required></textarea>
+        </label>        
+        <div class="form-error" ng-show="createDealForm.shortDescription.$invalid && !createDealForm.shortDescription.$pristine" >Description for this deal is required
+        </div>
+
+        <!--label class="item item-input item-stacked-label">
+          <span class="input-label"><Strong>Deal Detail Desc.</Strong>(For More Details)</span>
+          <textarea  name="description" ng-model="deal.deal_description "
+          placeholder="e.g. Get off on pizza before 2PM today. Offer valid only on Wednesdays"></textarea>
+        </label-->
+
+        <label class="item item-input item-stacked-label item-stacked-label-grey">
+          <span class="input-label"><Strong>Deal Link</Strong></span>
+          <input type="text" name="dealLink" ng-model="deal.deal_link" placeholder="http://www.xyz.com/offer">
+        </label>
+
+        <!--label class="item item-input item-stacked-label" ng-class="{ 'has-error' : createDealForm.keywords.$invalid && !createDealForm.keywords.$pristine }">
+          <span class="input-label"><Strong>Deal Keywords</Strong></span>
+          <input type="text" name="keywords" ng-model="deal.deal_keyword" placeholder="Transport, fashion, food" required>
+        </label>
+        <div class="form-error" ng-show="createDealForm.keywords.$invalid && !createDealForm.keywords.$pristine" >Keywords are required
+        </div-->
+
+
+        <label class="item item-input item-stacked-label item-stacked-label-grey" ng-class="{ 'has-error' : createDealForm.keywords.$invalid && !createDealForm.keywords.$pristine }">
+          <span class="input-label"><Strong>Deal First Keyword<span class="assertive"> *</span></Strong></span>
+          <!--input type="text" name="keywords" ng-model="deal.deal_keyword" placeholder="Transport, fashion, food" required-->
+          <angucomplete id="keyword_1"
+              placeholder="e.g. Nike"
+              pause="400"
+              selectedobject="deal.deal_keyword"
+              url="http://104.130.11.217:3300/deals/appMatchingKeys/"
+              datafield="data"
+              titlefield="deal_keyword"
+              inputclass="form-control form-control-small"/>
+          
+        </label>
+        <div class="form-error" ng-show="createDealForm.keywords.$invalid && !createDealForm.keywords.$pristine" >Keywords are required
+        </div>
+
+        <label class="item item-input item-stacked-label" >
+          <span class="input-label"><Strong>Deal Second Keyword (optional)</Strong></span>
+          
+          <angucomplete id="keyword_2"
+              placeholder="e.g. fashion"
+              pause="400"
+              selectedobject="deal.deal_keyword_2"
+              url="http://104.130.11.217:3300/deals/appMatchingKeys/"
+              datafield="data"
+              titlefield="deal_keyword"
+              inputclass="form-control form-control-small"/>
+          
+        </label>
+
+        <label class="item item-input item-stacked-label" >
+          <span class="input-label"><Strong>Deal Third Keyword (optional)</Strong></span>
+          
+          <angucomplete id="keyword_3"
+              placeholder="e.g. T-shirt"
+              pause="400"
+              selectedobject="deal.deal_keyword_3"
+              url="http://104.130.11.217:3300/deals/appMatchingKeys/"
+              datafield="data"
+              titlefield="deal_keyword"
+              inputclass="form-control form-control-small"/>
+          
+        </label>
+
+        
+
+        <!-- Deal Start Time Start -->
+        <div class="item item-divider">
+          <Strong>Deal Duration</Strong>
+        </div>
+        <label class="item item-input item-stacked-label item-stacked-label-grey" ng-class="{ 'has-error' : createDealForm.from_date.$invalid && !createDealForm.from_date.$pristine }">
+          <span class="input-label"><Strong>Deal Start Date<span class="assertive"> *</span></Strong></span>
+          <input type="date" name="from_date" ng-blur="enablecurrentDateTime(1)" ng-click="currentDateTime(1)" ng-disabled="enable_1" ng-model="deal.from_date" placeholder="" required>
+        </label>
+        <div class="form-error" ng-show="createDealForm.from_date.$invalid && !createDealForm.from_date.$pristine" >Deal Duration is required
+        </div>
+        <label class="item item-input item-stacked-label item-stacked-label-grey" ng-class="{ 'has-error' : createDealForm.from_time.$invalid && !createDealForm.from_time.$pristine }">
+          <span class="input-label"><Strong>From Time<span class="assertive"> *</span></Strong></span>
+          <input type="time" name="from_time" ng-blur="enablecurrentDateTime(2)" ng-click="currentDateTime(2)" ng-disabled="enable_2" ng-model="deal.from_time" placeholder="" required>
+        </label>
+        <div class="form-error" ng-show="createDealForm.from_time.$invalid && !createDealForm.from_time.$pristine" >Deal Duration is required
+        </div>
+        <!-- Deal Start Time End --->
+        <!-- Deal End Time Start -->
+        <label class="item item-input item-stacked-label item-stacked-label-grey" ng-class="{ 'has-error' : createDealForm.to_date.$invalid && !createDealForm.to_date.$pristine }">
+          <span class="input-label"><Strong>Deal End Date<span class="assertive"> *</span></Strong></span>
+          <input type="date" name="to_date" ng-blur="enablecurrentDateTime(3)" ng-click="currentDateTime(3)" ng-disabled="enable_3" ng-model="deal.to_date" placeholder="" required>
+        </label>
+        <div class="form-error" ng-show="createDealForm.to_date.$invalid && !createDealForm.to_date.$pristine" >Deal End Date is required
+        </div>
+        <label class="item item-input item-stacked-label item-stacked-label-grey" ng-class="{ 'has-error' : createDealForm.to_time.$invalid && !createDealForm.to_time.$pristine }">
+          <span class="input-label"><Strong>End Time<span class="assertive"> *</span></Strong></span>
+          <input type="time" ng-blur="enablecurrentDateTime(4)" ng-click="currentDateTime(4)" ng-disabled="enable_4" name="to_time" ng-model="deal.to_time" placeholder="" required>
+        </label>
+        <div class="form-error" ng-show="createDealForm.to_time.$invalid && !createDealForm.to_time.$pristine" >Deal End Time is required
+        </div>
+        <!-- Deal End Time End ---->
+        
+        
+        <label class="item item-input item-select item-stacked-label-grey" ng-class="{ 'has-error' : createDealForm.to_hours.$invalid && !createDealForm.to_hours.$pristine }">
+          <span class="input-label"><Strong>Show Deal for(HRS)<span class="assertive"> *</span></Strong></span>
+          <select ng-class="{ 'has-error' : createDealForm.to_hours.$invalid && !createDealForm.to_hours.$pristine }" ng-model="deal.to_hours" name="deal.to_hours" ng-change="getBill(deal)" required>
+
+            <option ng-repeat="hourValue in hourValuesArray |filter :{hourValue:'!'}" value="{{hourValue}}">
+
+              {{hourValue.hour}} (Hours)</option>
+
+          </select>
+          <!--input type="number" name="to_hours" ng-model="deal.to_hours" placeholder="e.g. 2 hrs" required-->
+        </label>        
+        <div class="form-error" ng-show="createDealForm.to_hours.$invalid && !createDealForm.to_hours.$pristine" >Provide valid hours
+        </div>
+
+
+        <!--div class="item item-divider"> 
+          <Strong>Choose Bussiness Address</Strong>
+        </div>
+        <label class="item item-input item-select">
+          <span class="input-label"><Strong>Business Addr.</Strong></span>
+          <select ng-class="{ 'has-error' : createDealForm.dealCat.$invalid && !createDealForm.dealCat.$pristine }" ng-model="deal.bizAddrId"  name="deal.bizAddr">
+            <option ng-repeat="singleAddress in businessAddress" value="{{singleAddress._id}}">{{singleAddress.biz_address}}</option>
+          </select>
+        </label-->
+
+      <div ng-if="deal.deal_location_type == 'local'">
+        <div class="item item-divider"> 
+          <Strong>Choose Bussiness Address</Strong>
+        </div>
+        <ion-radio name="bizAddrSelect" ng-model="deal.bizAddrSelect" ng-click="createBizAddrModal()" value='create' >Create new</ion-radio>
+        <ion-radio name="bizAddrSelect" ng-model="deal.bizAddrSelect" value='select' >Select from existing</ion-radio>
+
+        <div ng-show="deal.bizAddrSelect == 'select'">
+          <label class="item item-input item-select">
+            <span class="input-label"><Strong>Business Addr.<span class="assertive"> *</span></Strong></span>
+            <select ng-class="{ 'has-error' : createDealForm.bizAddr.$invalid && !createDealForm.bizAddr.$pristine }" ng-model="deal.bizAddrId"  name="deal.bizAddr">
+              <option ng-repeat="singleAddress in businessAddress" value="{{singleAddress._id}}">{{singleAddress.biz_address}}</option>
+            </select>
+          </label>
+          <!---ion-item ng-repeat="singleAddress in businessAddress">
+            <label class="checkbox">
+              <input type="checkbox" ng-model="deal.bizAddrId" name="deal.bizAddr[] ">
+            </label>{{singleAddress.biz_address}}
+          </ion-item-->
+        </div>
+      </div>
+        
+        <!--ion-checkbox ng-model="deal.bizAddrId" ng-repeat="singleAddress in businessAddress"  name="deal.bizAddrId[]">{{singleAddress.biz_address}}</ion-checkbox-->
+
+        <!--div ng-show="deal.bizAddrSelect == 'create'">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label"><Strong>New Bussiness Address</Strong></span>
+            <textarea placeholder="e.g. St.no. 45, Texas US" name="deal.bizAddr" ng-model="deal.newBizAddr" ng-disabled="{{deal.bizAddrSelect}}"></textarea>
+          </label>
+        </div>     
+
+        <label ng-show="deal.bizAddrSelect == 'create'" class="item item-input item-stacked-label" ng-class="{ 'has-error' : createDealForm.zip.$invalid && !createDealForm.zip.$pristine }">
+          <span class="input-label"><Strong>Zip Code</Strong></span>
+          <input type="number" name="zip" ng-model="deal.deal_zipcode" placeholder="e.g. 160014" >
+        </label>        
+        <div class="form-error" ng-show="createDealForm.zip.$invalid && !createDealForm.zip.$pristine" >Zip Code is required
+        </div-->        
+
+
+
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label"><Strong>Video URL</Strong></span>
+          <input type="text" name="videoUrl" ng-model="deal.deal_video" placeholder="e.g. https://www.youtube.com/watch?v=ZHMVP5aLAPM">
+        </label>
+
+        <div class="item item-button-right">
+          <Strong>Upload Deal Picture</Strong>          
+          <button class="button pink-white-theme-color" ng-click="takePic()" id="uploadDealImageButton">Upload</button>
+        </div>
+        <div class="padding padding-picture" id="padding-picture" style="display:none">      
+          <img src="../img/logo.png" id="dealImage" width="100" height="100" style="display:none">        
+        </div>
+        
+        <!--div class="item item-button-right">
+          <Strong>Upload Deal Icon</Strong>          
+          <button class="button pink-white-theme-color" ng-click="takeIconPic()" id="uploadDealIconButton">Upload</button>
+        </div>
+        <div class="padding padding-icon" id="padding-icon" style="display:none">      
+          <img src="../img/logo.png" id="dealIcon" width="100" height="100" style="display:none">        
+        </div-->
+
+        <!--div class="item item-toggle">
+           <Strong>Favorite</Strong>
+           <label class="toggle toggle-pink">
+             <input type="checkbox" name="favourite" ng-model="deal.favourite" value="1">
+             <div class="track">
+               <div class="handle"></div>
+             </div>
+           </label>
+        </div-->
+        <div class="padding" ng-if="bill_credit">
+          <button class="button button-outline button-balanced notify-message-button">
+            <!-- <h6>Charged for <strong>{{ bill_credit }} Credits</strong> = {{ bill_hour }} Hours( {{ bill_notify }} Notify Hours + {{ bill_active }} Active Hour)</h6> -->
+             <h6>Total Hours Charged = {{ bill_hour }} Hours
+             Customers will see your deal from 
+
+              <span ng-if="!fromDate 
+              "> 
+                {{deal.from_date | date:'MM/dd/yyyy HH:mm:ss' }}
+                to
+              </span>
+               
+               
+              <span ng-if="!toDate">
+             {{deal.to_date | date:'MM/dd/yyyy HH:mm:ss'}} 
+
+              </span>
+
+              <span ng-if="deal.frdate && toDate"> 
+                {{deal.frdate}} 
+                to 
+              </span>
+              
+               
+              <span ng-if="toDate">
+             {{toDate}} 
+
+              </span>
+
+
+               </h6>
+
+            <!-- <h6>Hours Charged <strong>= {{ bill_credit }}  (You get {{ bill_hour }} Hours).</strong> Your deal will be active for {{ bill_notify }} hours before and {{ bill_active }} hours during the deal time.</h6> -->
+          </button>
+        </div>
+
+        <div class="padding" >
+          <button class="button button-block pink-white-theme-color" ng-disabled="createDealForm.$invalid" ng-click="createDealOptionNew(deal, 1)">
+            Publish Deal
+          </button>
+          <button class="button button-block pink-white-theme-color" ng-disabled="createDealForm.$invalid" ng-click="createDealOptionNew(deal, 0)">
+            Save For Later
+          </button>
+        </div>
+        
+      </form>
+    </div>  
+  </ion-content>
+</ion-view>

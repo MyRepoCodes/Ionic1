@@ -1,0 +1,36 @@
+<ion-modal-view class="review-modal">
+  <ion-header-bar class="pink-white-theme-color">
+    <h1 class="title">Reviews on this Deal</h1>
+    <div class="buttons">
+      <button class="button button-outline close-button" ng-click="closeLogin(2)">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form name="submitReviewForm" ng-submit="submitReview(reviews)" novalidate>
+
+      <div class="list">
+        <a class="item item-avatar" href="#" ng-repeat="dealReview in dealReviews">
+          <!--img src="http://192.155.246.146:3300/app_images/mcfly.jpg"-->
+          <img ng-src="{{profilePicPath}}{{dealReview.reviewby.photo}}" err-src="http://192.155.246.146:3300/app_images/photo_unavailable2.jpg" >
+          <h2>{{dealReview.reviewby.first_name}} {{dealReview.reviewby.last_name}}</h2>
+          <p>{{dealReview.review}}</p>
+        </a>        
+
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : submitReviewForm.review.$invalid && !submitReviewForm.review.$pristine }">
+          <textarea rows="4" placeholder="Submit your review here..." name="review" ng-model="reviews.review" required></textarea>
+        </label>
+        <div class="form-error" ng-show="submitReviewForm.review.$invalid && !submitReviewForm.review.$pristine" >Review shouldn't be empty 
+        </div>
+
+        
+        <div class="padding">
+          <button class="button button-block pink-white-theme-color" type="submit" ng-disabled="submitReviewForm.$invalid">
+            Submit
+          </button>
+        </div>
+
+      </div>
+
+    </form>
+  </ion-content>
+</ion-modal-view>

@@ -1,0 +1,134 @@
+<ion-view view-title="My Published Deals" hide-back-button="true" cache-view="false"> 
+  
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-dark ion-ios-more" ng-click="popover.show($event)">      
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content class="has-tabs" drag-content="false">
+
+    <!--div class="item item-divider">
+      Total Deal Details
+    </div>
+    <div class="list">
+      <a class="item item-icon-left">
+        <i class="icon ion-ios-arrow-right"></i>
+        Total Deals Created
+        <span class="badge badge-dark">{{mydeals.length}} Deals</span>
+      </a>
+
+      <a class="item item-icon-left item-icon-right">
+        <i class="icon ion-ios-arrow-right"></i>
+        Total Credits Used
+        <span class="badge badge-dark" ng-if="credits.credit_used_amount">{{credits.credit_used_amount - credits.credit_remain_amount}} Credit</span>
+        <span class="badge badge-dark" ng-if="!credits.credit_used_amount">0 Credit</span>
+      </a>  
+
+      <a class="item item-icon-left">
+        <i class="icon ion-ios-arrow-right"></i>
+        Total Active Deals
+        <span class="badge badge-dark">{{myActiveDeals.length}} Deals</span>
+      </a>     
+
+      <a class="item item-icon-left">
+        <i class="icon ion-ios-arrow-right"></i>
+        Total Past Deals
+        <span class="badge badge-dark">{{mydeals.length}} Deals</span>
+      </a>        
+    </div>
+
+    <div class="item item-divider">
+      My Past Deals Listing
+    </div-->
+    <ion-list
+          show-delete="shouldShowDelete"
+          show-reorder="shouldShowReorder"
+          can-swipe="listCanSwipe">
+      <ion-item ng-repeat="deal in pastDeals"
+                class="item-thumbnail-left past-deals-ion-item">
+          
+          <img  ng-src="{{dealImagePath}}{{deal.deal_photo}}" 
+                err-src="./img/noimage2.png" 
+                ng-click="view(deal._id)">
+
+          <div class="single-deal-head">
+            <div class="single-deal-head-left-block">
+              <h2>{{deal.deal_name}}</h2>
+              <p>by <span class="deal-owner-name">{{deal.deal_owner.first_name + ' ' + deal.deal_owner.last_name}}</span></p>
+            </div> 
+            <div class="single-deal-head-right-block">
+              <p class="deal-price" >
+                <span class="rated-stars">
+                  <i class="icon ion-star assertive" ng-repeat="n in [] | ratingstar:deal.deal_rating_count"></i>
+                </span>
+                <span class="unrated-stars">
+                  <i class="icon ion-ios-star-outline assertive" ng-repeat="n in [] | ratingstar:5-deal.deal_rating_count"></i>
+                </span>
+              </p>
+            </div>            
+          </div>
+          
+            <p class="deal-short-description">{{deal.deal_short_desc}}</p>
+            
+            <div class="row deal-sharing-n-review">
+              <div class="col col-55 deal-rating">
+                {{deal.deal_review_count}} Reviews
+              </div>
+              <div class="col col-55 deal-sharing" >
+                <button class="button button-outline pink-white-theme-color buy-credit-button" ng-click="view(deal._id)">
+                  View
+                </button>
+              </div>
+            </div>
+
+            <div class="past-card-wrapper">
+              <div class="card inner-deal-card">
+                <div class="row">
+                  <div class="col col-50">
+                    <strong>Total Hour:</strong> {{deal.deal_hour}} hrs
+                  </div>
+                  <div class="col col-50">
+                    <strong>Hour Used:</strong> {{deal.deal_salevalue}} hours
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-50">
+                    <strong>Active Hours:</strong> {{deal.deal_hour - deal.notify_hours | number:1}} hrs
+                  </div>
+                  <div class="col col-50">
+                    <strong>Notify Hours:</strong> {{deal.notify_hours | number:1}} hrs
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ion-option-button 
+                              ng-if="deal.deal_publish == '0'"
+                              class="button-balanced"
+                              ng-click="changeDealStatus(deal._id, '1', 'Published')">
+              Publish
+            </ion-option-button>
+          
+            <ion-option-button class="button-info button-positive"
+                               ng-click="clone(deal._id)">
+              Clone
+            </ion-option-button>
+        
+      </ion-item>
+    </ion-list>
+
+    <!--ion-infinite-scroll
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll-->
+
+    <div class="row responsive-sm">
+      <div class="col">
+        <h3 ng-show="!pastDeals.length" class="nothing-found-block">
+          <i class="icon ion-android-alert"></i> No Published Deal Found!
+        </h3>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

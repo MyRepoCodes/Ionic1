@@ -1,0 +1,26 @@
+<ion-view view-title="FAQ" hide-back-button="true" cache-view="false">
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals     
+    </a>
+  </ion-nav-buttons>
+  <ion-content class="has-tabs" drag-content="false">
+    
+    <div class="card" ng-repeat="faq in faqs">
+      <div class="item item-text-wrap">
+        <strong>Q: </strong>{{faq.question}} <br>
+        <strong>A: </strong>{{faq.answer}}
+      </div>
+    </div>
+
+    <div class="row responsive-sm">
+      <div class="col">
+        <h1 ng-show="!faqs.length" class="nothing-found-block">
+          <i class="icon ion-android-alert"></i> No FAQ Found!
+        </h1>
+      </div>
+    </div>
+    
+
+  </ion-content>
+</ion-view>

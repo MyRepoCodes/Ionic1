@@ -1,0 +1,102 @@
+<ion-view view-title="My UnPublished Deals" hide-back-button="true" cache-view="false"> 
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals     
+    </a>
+  </ion-nav-buttons>
+  <ion-content class="has-tabs" drag-content="false">
+    <ion-list
+          show-delete="shouldShowDelete"
+          show-reorder="shouldShowReorder"
+          can-swipe="listCanSwipe">
+      <ion-item ng-repeat="deal in mydeals" ng-if="deal.deal_publish == '0'"
+                class="item-thumbnail-left"
+                deal="deal">
+                <!--href="#/app/single-deal/{{deal._id}}"-->
+        
+          <img  ng-src="{{dealImagePath}}{{deal.deal_photo}}" 
+                err-src="./img/noimage2.png" 
+                ng-click="view(deal._id)">
+
+          <div class="single-deal-head">
+            <div class="single-deal-head-left-block">
+              <h2>{{deal.deal_name}}</h2>
+              <p>by <span class="deal-owner-name">Me</span></p>
+            </div> 
+            <div class="single-deal-head-right-block">
+              <p class="deal-price" >
+                <span class="rated-stars">
+                  <i class="icon ion-star assertive" ng-repeat="n in [] | ratingstar:deal.deal_rating_count"></i>
+                </span>
+                <span class="unrated-stars">
+                  <i class="icon ion-ios-star-outline assertive" ng-repeat="n in [] | ratingstar:5-deal.deal_rating_count"></i>
+                </span>
+              </p>
+            </div>            
+          </div>
+          
+          
+          <p class="deal-short-description">{{deal.deal_short_desc}}</p>
+            
+            <div class="row deal-sharing-n-review">
+              <div class="col col-66 deal-rating">
+                {{deal.deal_review_count}} Reviews
+              </div>
+              <div class="col col-55 deal-sharing" >
+                <button class="button button-outline pink-white-theme-color buy-credit-button" ng-click="view(deal._id)">
+                  View
+                </button>
+               
+              </div>
+              <!-- <div class="col col-55 deal-sharing" >
+                 <button class="button button-outline pink-white-theme-color buy-credit-button"  ng-click="deleteDeal(deal._id)" ng-confirm-click="Would you like to Delete This Deal">
+                  Delete
+                </button>
+               
+              </div> -->
+            </div>
+          
+            <ion-option-button 
+                              ng-if="deal.deal_publish == '0'"
+                              class="button-assertive"
+                              ng-click="removeDeal(deal._id)">
+              Delete
+            </ion-option-button>
+
+            <ion-option-button 
+                              ng-if="deal.deal_publish == '0'"
+                              class="button-balanced"
+                              ng-click="publishDeal(deal._id)">
+              Publish
+            </ion-option-button>
+
+           <!--  <ion-option-button 
+                              ng-if="deal.deal_publish == '0'"
+                              class="button-balanced"
+                              ng-click="changeDealStatus(deal._id, '1', 'Published')">
+              Publish
+            </ion-option-button> -->
+          
+            <!--ion-option-button class="button-info button-positive"
+                               ng-click="clone(deal._id)">
+              Clone
+            </ion-option-button-->
+        
+      </ion-item>
+    </ion-list>
+
+    <!--ion-infinite-scroll
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll-->
+
+    <div class="row responsive-sm">
+      <div class="col">
+        <h1 ng-show="!mydeals.length" class="nothing-found-block">
+          <i class="icon ion-android-alert"></i> No Deals Listed!
+        </h1>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

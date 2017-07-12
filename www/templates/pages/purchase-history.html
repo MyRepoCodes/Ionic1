@@ -1,0 +1,128 @@
+<ion-view view-title="Purchase History" cache-view="false" >
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-dark ion-ios-more" ng-click="popover.show($event)">      
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content class="has-tabs account-page">
+
+    <div class="item item-divider">
+      My Current Hour Status
+    </div>
+    <div class="list">
+
+      <a class="item item-icon-left" href="#/app/credits-history">
+        <i class="icon ion-cash"></i>
+        Total Hours Bought(latest)
+          <span class="badge badge-balanced custom-badge">({{purchaseHistory[0].credit_balance}} HRS / ${{purchaseHistory[0].credit_bought}})</span>
+      </a>
+
+      <a class="item item-icon-left" href="#/app/credits-history">
+        <i class="icon ion-cash"></i>
+        Total Hours Bought
+        <span class="badge badge-balanced custom-badge" ng-if="credits.credit_remain_amount">({{credits.credit_balance}} HRS / ${{credits.credit_bought}})</span>
+        <span class="badge badge-balanced" ng-if="!credits.credit_remain_amount">0 Hour</span>
+      </a>
+
+      <!--a class="item item-icon-left item-icon-right" href="#">
+        <i class="icon ion-ios-briefcase-outline"></i>
+        Total Credit Bought
+        <span class="badge badge-balanced">{{credits.credit_bought}} Deals</span>
+      </a-->
+
+      <a class="item item-icon-left item-icon-right" href="#/app/credits-used-history">
+        <i class="icon ion-ios-briefcase"></i>
+        Used Hours so far...
+        <span class="badge badge-balanced custom-badge" ng-if="credits.credit_used_amount">({{credits.credit_used_amount}} HRS / ${{totalSaleValue}})<!--{{credits.credit_used_amount - credits.credit_remain_amount}}--></span>
+        <span class="badge badge-balanced custom-badge" ng-if="!credits.credit_used_amount">0 Hour</span>
+      </a>
+
+      <a class="item item-icon-left">
+        <i class="icon ion-card"></i>
+        Current Hour Bal.
+        <span class="badge badge-balanced custom-badge" ng-if="credits.credit_remain_amount">({{credits.credit_remain_amount}} HRS/  ${{credits.credit_bought - totalSaleValue | number: 1}})</span>
+        <span class="badge badge-balanced custom-badge" ng-if="!credits.credit_remain_amount">0 Hour</span>
+      </a>
+
+      <!--a class="item item-icon-left item-icon-right" href="#/app/credits-history">
+        <i class="icon ion-card"></i>
+        Total Amount Paid
+        <span class="badge badge-balanced" ng-if="credits.credit_bought">${{credits.credit_bought}}</span>
+        <span class="badge badge-balanced" ng-if="!credits.credit_bought">$0</span>
+      </a-->
+
+      <div class="item">
+        <a class="button button-outline payment-history-button pink-white-theme-color" href="#/app/credits">
+          Buy Hours
+        </a>
+        <a class="button button-outline payment-history-button pink-white-theme-color" href="#/app/create-deal">
+          Create Deal
+        </a>   
+      </div>
+      
+    </div>
+
+    <div class="item item-divider">
+      Total Purchase Status
+    </div>
+    <div class="list">
+
+      <a class="item item-icon-left">
+        <i class="icon ion-ios-briefcase"></i>
+        Total Packages
+        <span class="badge badge-balanced custom-badge" ng-if="totalPackages">{{totalPackages}} Package</span>
+        <span class="badge badge-balanced custom-badge" ng-if="!totalPackages">0 Package</span>
+      </a>
+
+      <a class="item item-icon-left">
+        <i class="icon ion-ios-briefcase"></i>
+        Total Hours 
+        <span class="badge badge-balanced custom-badge" ng-if="credits.credit_balance">{{credits.credit_balance}}</span>
+        <span class="badge badge-balanced custom-badge" ng-if="!credits.credit_balance">0 Credit</span>
+      </a>
+
+      <a class="item item-icon-left item-icon-right">
+        <i class="icon ion-cash"></i>
+        Total $
+        <span class="badge badge-balanced custom-badge" ng-if="credits.credit_used_amount">${{credits.credit_bought}}</span>
+        <span class="badge badge-balanced custom-badge" ng-if="!credits.credit_used_amount">$0</span>
+      </a>
+
+      <a class="item item-icon-left">
+        <i class="icon ion-card"></i>
+        Avg/Hour
+        <span class="badge badge-balanced custom-badge" ng-if="credits.credit_used_amount">{{credits.credit_bought/credits.credit_balance  | number:2}} $/Hour</span>
+        <span class="badge badge-balanced custom-badge" ng-if="!credits.credit_used_amount">$0</span>
+      </a>
+
+    </div>
+
+    <div class="item item-divider">
+      <Strong>My Purchase History <i class="icon ion-arrow-down-b"></i></Strong>
+    </div>
+    <!--label class="item item-input item-select item-stacked-label">
+      <span class="input-label"><Strong>From</Strong></span>
+      <input type="date" name="from_date" ng-model="from_date" placeholder="">
+    </label-->
+
+    <div ng-repeat="credit in purchaseHistory">
+      <div class="item item-divider">
+        {{$index+1}}. {{credit.credit_created | date}}
+      </div>
+      <div class="list">
+        <div class="card">
+          <div class="item item-text-wrap">
+            <strong>Package:</strong> {{credit.credit_package[0].package_name}}<br>
+            <strong>Amount Paid:</strong> ${{credit.credit_bought}}<br>
+            <strong>Total Hours:</strong> {{credit.credit_balance}} Hour<br>
+            <strong>Status:</strong> {{credit.credit_status}}<br>
+            <strong>Mode:</strong> {{credit.credit_mode}}<br>
+            <!--strong>Transaction:</strong> {{credit.credit_transaction}}<br-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

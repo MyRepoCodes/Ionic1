@@ -1,0 +1,26 @@
+<ion-view view-title="Notifications" cache-view="false" >
+  <ion-content class="has-tabs">    
+    <ion-list 
+        show-delete="shouldShowDelete"
+        show-reorder="shouldShowReorder"
+        can-swipe="listCanSwipe">
+      <ion-item ng-repeat="notification in notifications"
+                class="item item-icon-left">
+        <i class="icon ion-chatbox-working "></i>
+        {{notification.notification}}
+        <ion-option-button 
+            class="button-positive"
+            ng-click="viewNotification(notification.deal_id._id, $index)">
+          View
+        </ion-option-button>
+      </ion-item>
+    </ion-list>    
+    <div class="row responsive-sm">
+      <div class="col">
+        <h3 ng-show="!notifications.length" class="nothing-found-block">
+          <i class="icon ion-android-alert"></i> No New Notification!
+        </h3>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

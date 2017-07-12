@@ -1,0 +1,101 @@
+<ion-view view-title="Via Credit Card" cache-view="false">  
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals     
+    </a>
+  </ion-nav-buttons>
+  <ion-content class="has-tabs" drag-content="false">
+    <div class="list create-deal">
+      <form name="buyCreditForm" class="createDealForm" novalidate>
+
+
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : buyCreditForm.cc_number.$invalid && !buyCreditForm.cc_number.$pristine }">
+          <span class="input-label"><Strong>Card Number</Strong></span>
+          <input type="number" name="cc_number" ng-model="details.cc_number" placeholder="e.g. 1000122121002000" ng-minlength="16" ng-maxlength="16" required>
+        </label>
+        <div class="form-error" ng-show="buyCreditForm.cc_number.$invalid && !buyCreditForm.cc_number.$pristine" >Card Numer is should be valid
+        </div>
+
+
+
+        <div class="item item-divider" ng-class="{ 'has-error' : buyCreditForm.cc_type.$invalid  && !buyCreditForm.cc_type.$pristine}"> 
+          <strong>Type</strong>
+        </div>        
+        <ion-radio name="cc_type" ng-model="details.cc_type" ng-value="'mastercard'" required>MasterCard</ion-radio>
+        <ion-radio name="cc_type" ng-model="details.cc_type" ng-value="'visa'" required>Visa</ion-radio>
+        <div class="form-error" ng-show="buyCreditForm.cc_type.$invalid && !buyCreditForm.cc_type.$pristine" >Please select Card Type
+        </div>
+
+
+
+        
+        <label class="item item-input item-select">
+          <span class="input-label"><Strong>Expiry Month</Strong></span>
+          <select ng-class="{ 'has-error' : buyCreditForm.expire_month.$invalid && !buyCreditForm.expire_month.$pristine }" ng-model="details.expire_month"  name="details.expire_month">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+        </label>
+        
+
+
+
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : buyCreditForm.expire_year.$invalid && !buyCreditForm.expire_year.$pristine }">
+          <span class="input-label"><Strong>Expiry Year</Strong></span>
+          <input type="number" name="expire_year" ng-model="details.expire_year" ng-minlength="4" ng-maxlength="4" placeholder="e.g. 2020">
+        </label>
+        <div class="form-error" ng-show="buyCreditForm.expire_year.$invalid && !buyCreditForm.expire_year.$pristine" >Year Should be Valid
+        </div>
+
+
+
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : buyCreditForm.cvv.$invalid && !buyCreditForm.cvv.$pristine }">
+          <span class="input-label"><Strong>CVV</Strong></span>
+          <input type="number" name="cvv" ng-model="details.cvv" placeholder="e.g. 110" ng-minlength="3" ng-maxlength="3" >
+        </label>
+        <div class="form-error" ng-show="buyCreditForm.cvv.$invalid && !buyCreditForm.cvv.$pristine" >CVV Number Should be Valid
+        </div>
+
+
+
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : buyCreditForm.first_name.$invalid && !buyCreditForm.first_name.$pristine }">
+          <span class="input-label"><strong>First Name</strong></span>
+          <input type="text" placeholder="First Name"
+              name="first_name"
+              ng-model="details.first_name"
+              required>
+        </label>
+        <div class="form-error" ng-show="buyCreditForm.first_name.$invalid && !buyCreditForm.first_name.$pristine" >First Name is required
+        </div>
+
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label"><strong>Last Name</strong></span>
+          <input type="text" placeholder="Last Name"
+              name="last_name"
+              ng-model="details.last_name"
+              >
+        </label>
+
+
+
+        <div class="padding" >
+          <button class="button button-block pink-white-theme-color" ng-disabled="buyCreditForm.$invalid" ng-click="buyPackageViaCC(details)">
+            Buy Package
+          </button>
+        </div>
+
+      </form>
+    </div>  
+  </ion-content>
+</ion-view>

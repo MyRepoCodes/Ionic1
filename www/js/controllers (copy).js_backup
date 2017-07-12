@@ -1,0 +1,640 @@
+angular.module('deals.controllers', ['ngCordova','ngFileUpload'])
+
+.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+
+  // With the new view caching in Ionic, Controllers are only called
+  // when they are recreated or on app start, instead of every page change.
+  // To listen for when this page is active (for example, to refresh data),
+  // listen for the $ionicView.enter event:
+  //$scope.$on('$ionicView.enter', function(e) {
+  //});
+
+  // Form data for the login modal
+  $scope.loginData = {};
+
+  // Create the login modal that we will use later
+  $ionicModal.fromTemplateUrl('templates/users/login.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  // Triggered in the login modal to close it
+  $scope.closeLogin = function() {
+    $scope.modal.hide();
+  };
+
+  // Open the login modal
+  $scope.login = function() {
+    $scope.modal.show();
+  };
+
+  // Perform the login action when the user submits the login form
+  $scope.doLogin = function() {
+    console.log('Doing login', $scope.loginData);
+
+    // Simulate a login delay. Remove this and replace with your login
+    // code if using a login system
+    $timeout(function() {
+      $scope.closeLogin();
+    }, 1000);
+  };
+
+
+  if (localStorage.getItem("userData") === null) {
+    console.log('Its NULL') ;
+  }else{
+    $scope.userData = JSON.parse(window.localStorage['userData']);
+    // console.log($scope.userData);
+  }
+
+
+  /*
+   * if given group is the selected group, deselect it
+   * else, select the given group
+   */
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
+
+  $scope.group = 'deals';
+
+  $scope.dealCategories = [
+            {"id": 1, "catName": "Foods"},
+            {"id": 2, "catName": "Transport"},
+            {"id": 3, "catName": "Clothings"},
+            {"id": 4, "catName": "Toys"},
+            {"id": 5, "catName": "Gifts"},
+            {"id": 6, "catName": "Apparals"}
+        ];
+
+})
+
+.controller('LandingInCtrl', function($scope, $state) {
+  
+  $scope.gotoRegister = function() {
+    console.log('register');
+    $state.go('register');
+  };
+
+  $scope.gotoLogin = function() {
+    console.log('Sign-In');
+    $state.go('signin');
+  };
+
+})
+
+.controller('SettingsCtrl', function($scope, $state) {
+  
+  $scope.check = function() {
+    console.log('check');
+  };
+
+})
+.controller('ProfileCtrl', function($scope, $state) {
+  
+  $scope.check = function() {
+    console.log('check');
+  };
+
+  $scope.posts = [
+          {"id": 1, "text": "Foods"},
+          {"id": 2, "text": "Transport"},
+          {"id": 3, "text": "Clothings"},
+          {"id": 4, "text": "Toys"},
+          {"id": 5, "text": "Gifts"},
+          {"id": 6, "text": "Apparals"}
+      ];
+})
+
+.controller('SignInCtrl', function($scope, $timeout, $ionicLoading, $ionicPopup, $state, $http, LoginService) {
+
+    $scope.signIn = function(user) {
+
+        // Setup the loader
+        $ionicLoading.show({
+          content: 'Loading',
+          animation: 'fade-in',
+          showBackdrop: true,
+          maxWidth: 200,
+          showDelay: 0
+        });
+
+        console.log('Sign-In', user);
+
+        // Hitting Login Service*/
+
+        LoginService.loginUser(user.email, user.password).success(
+
+          function(data) {            
+            
+            console.log(data);
+
+            $ionicLoading.hide();
+              
+            if (data.code == 200) {
+              
+              var userData = JSON.parse(window.localStorage['userData'] || '{}');
+            
+              console.log('userData.username: ' + userData.username);
+              console.log('userData.usertype:' + userData.usertype);
+
+              $state.go('app.deals');
+
+            } else {                
+                var alertPopup = $ionicPopup.alert({
+                    title:    'Login failed!',
+                    template: 'Please check your credentials!',
+                    buttons:[
+                      {
+                        text: '<b>Ok</b>',
+                        type: 'pink-white-theme-color'
+                      }
+                    ]
+                });
+            }
+
+            
+
+
+        });
+
+    }
+  
+})
+.controller('RegisterCtrl', function($scope, $state, $ionicLoading, RegisterService, $ionicPopup, $cordovaFileTransfer, Upload) {
+  
+  $scope.gotoLogin = function() {
+    console.log('Sign-In');
+    $state.go('landing');
+  };
+  
+
+  $scope.signup = function(user) {
+
+      // Setup the loader
+      $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+      });
+
+      // user.profilePic = $scope.picData;
+      // user.profilePic = BASE64IMAGE;
+
+      console.log('Register', user);
+
+      // Hitting Login Service
+      
+      RegisterService.registerUser(user).success(
+
+        function(data) {            
+          
+          console.log(data);
+
+          $ionicLoading.hide();
+          
+          if (data.code == 200) {
+
+              var alertPopup = $ionicPopup.alert({
+                  title:    'Registered Successfully!',
+                  template: 'Your credentials has been mailed. You may log in now.',
+                  buttons:[
+                    {
+                      text: '<b>Ok</b>',
+                      type: 'pink-white-theme-color'
+                    }
+                  ]
+              });
+
+              $state.go('landing');
+
+          } else if(data.error.code == 11000){                
+              var alertPopup = $ionicPopup.alert({
+                  title:    'Registeration failed!',
+                  template: 'Email already exists. Please try with different one.',
+                  buttons:[
+                    {
+                      text: '<b>Ok</b>',
+                      type: 'pink-white-theme-color'
+                    }
+                  ]
+              });
+          } else {                
+              var alertPopup = $ionicPopup.alert({
+                  title:    'Registeration failed!',
+                  template: 'Oop\'s! something went wrong.',
+                  buttons:[
+                    {
+                      text: '<b>Ok</b>',
+                      type: 'pink-white-theme-color'
+                    }
+                  ]
+              });
+          }       
+
+      });
+      
+  }
+
+
+  /* upload user's profile pic */
+
+  $scope.takePic = function() {
+      console.log('here');
+      var options =   {
+          quality: 50,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: 0,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+          encodingType: 0     // 0=JPG 1=PNG
+      }
+      navigator.camera.getPicture($scope.onSuccess,$scope.onFail,options);
+
+  }
+
+  $scope.onSuccess = function(DATA_URL) {
+
+    // console.log(FILE_URI);
+    // console.log(DATA_URL);
+
+    $scope.picData = "data:image/jpeg;base64," + DATA_URL;
+
+    var image = document.getElementById('myImage2');
+    image.src = "data:image/jpeg;base64," + DATA_URL;
+    // image.src = FILE_URI;
+    image.style.display = "block";
+    document.getElementById('uploadProfilePicButton').style.display = "none";
+
+    // Upload by help of cordova plugin
+
+    /*
+     var options = {
+          fileKey: "profilePic",
+          fileName: "image.png",
+          chunkedMode: false,
+          mimeType: "image/png",
+          headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+          trustEveryone: true,
+          chunkedMode: true
+      };
+      $cordovaFileTransfer.upload(USER_REGISTER, FILE_URI, options).then(function(result) {
+          console.log("SUCCESS: " + JSON.stringify(result.response));
+      }, function(err) {
+          console.log("ERROR: " + JSON.stringify(err));
+      }, function (progress) {
+          // constant progress updates
+      });
+    */
+  };
+
+  $scope.onFail = function(e) {
+    console.log("On fail " + e);
+  }
+
+
+// Upload By ng-upload
+
+/*
+  $scope.submit = function(file) {
+      console.log('Inside Submit ');
+      console.log('Inside Upload [File Type:'+ file.type +']');
+
+      if (signupForm.file.$valid && file) {
+        $scope.upload($scope.file);
+      }else{
+        console.log('Error File');
+      }
+      $scope.upload(file);
+    };
+
+  // upload on file select or drop
+  $scope.upload = function (file) {
+      
+      console.log(file);
+      console.log('Inside Upload [File Type:'+ file.type +']');
+
+      file.upload = Upload.upload({
+          url: USER_REGISTER,
+          // fields: $scope.user,
+          data: {              
+                  file: file
+                },
+          headers:  {
+                      "Content-Type": "application/x-www-form-urlencoded"
+                    }
+      }).then(function (resp) {
+          console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+      }, function (resp) {
+          console.log('Error status: ' + resp.status);
+      }, function (evt) {
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+      });
+  };*/
+
+})
+.controller('ForgotCtrl', function($scope, $state, $ionicLoading, $ionicPopup, ForgotService) {
+
+  $scope.gotoLogin = function() {
+    console.log('Sign-In');
+    $state.go('landing');
+  };
+
+  $scope.forgotPassword = function(user) {
+
+     // console.log('here') ;
+        // Setup the loader
+      
+        $ionicLoading.show({
+          content: 'Loading',
+          animation: 'fade-in',
+          showBackdrop: true,
+          maxWidth: 200,
+          showDelay: 0
+        });
+
+        console.log('Sign-In', user);
+
+        // Hitting Forgot password Service
+
+        ForgotService.forgotUser(user.email).success(
+
+          function(data) {            
+            
+            console.log(data);
+
+            $ionicLoading.hide();
+              
+            if (data.code == 200) {
+
+                var alertPopup = $ionicPopup.alert({
+                    title:    'Password Recovered Successfully',
+                    template: 'Please check your Email for new password.',
+                    buttons:[
+                      {
+                        text: '<b>Ok</b>',
+                        type: 'pink-white-theme-color'
+                      }
+                    ]
+                });
+
+                $state.go('landing');
+
+            } else {                
+                var alertPopup = $ionicPopup.alert({
+                    title:    'Invalid Email!',
+                    template: 'Please check your Email you might have mistyped!',
+                    buttons:[
+                      {
+                        text: '<b>Ok</b>',
+                        type: 'pink-white-theme-color'
+                      }
+                    ]
+                });
+            }           
+
+        });
+
+    }
+
+})
+
+.controller('DealsCtrl', function($scope, $state, $location, DealService) {
+ 
+ $scope.shouldShowDelete = false;
+ $scope.shouldShowReorder = false;
+ $scope.listCanSwipe = true;
+
+ $scope.dealImagePath = DEAL_IMAGE;
+
+
+
+  DealService.findAllDeals().then(function (deals) {
+    $scope.deals = deals.data;
+    // console.log(deals);
+  });
+  
+  
+
+  $scope.share = function(dealId){
+    console.log('hey' + dealId);
+  };
+
+  $scope.view = function(dealId){
+    $location.path( "app/deals/"+dealId );
+  };
+
+
+
+
+  /* Infinite Scroll starts */
+
+  $scope.loadMore = function(){    
+
+  console.log('Load More');
+  DealService.findAllDeals().then(function (deals) {
+    // $scope.deals = newDeals.data;
+    $scope.deals.push(deals.data);
+    // console.log(deals.data);
+    $scope.$broadcast('scroll.infiniteScrollComplete');
+  });
+
+    // $http.get('/more-items').success(function(items) {
+    //   useItems(items);
+    //   $scope.$broadcast('scroll.infiniteScrollComplete');
+    // });
+
+  };
+  
+
+
+
+  /* Rating Scopes Starts */
+
+  $scope.rating = 4;
+  $scope.data = {
+    rating : 2,
+    max: 5
+  }
+
+  $scope.$watch('data.rating', function() {
+    //console.log('New value: '+$scope.data.rating);
+  });
+
+
+
+  /* Gallery and Camera Options for deal image upload */
+
+  $scope.takePic = function() {
+      console.log('here');
+      var options =   {
+          quality: 50,
+          destinationType: Camera.DestinationType.FILE_URI,
+          sourceType: 0,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+          encodingType: 0     // 0=JPG 1=PNG
+      }
+      navigator.camera.getPicture(onSuccess,onFail,options);
+
+  }
+  var onSuccess = function(FILE_URI) {
+      console.log(FILE_URI);
+      $scope.picData = FILE_URI;
+      $scope.picDataBase64 = "data:image/jpeg;base64," + FILE_URI;
+
+      alert($scope.picData + 'base64'+ $scope.picDataBase64 );
+      console.log('$scope.picData: ' + $scope.picData);
+      $scope.$apply();
+
+      var image = document.getElementById('myImage');
+      image.src = FILE_URI;
+      // image.src = "data:image/jpeg;base64," + FILE_URI;
+      // console.log('image: '+image);
+
+  };
+  var onFail = function(e) {
+      console.log("On fail " + e);
+  }
+  $scope.send = function() {   
+      var myImg = $scope.picData;
+      var options = new FileUploadOptions();
+      options.fileKey="post";
+      options.chunkedMode = false;
+      var params = {};
+      params.user_token = localStorage.getItem('auth_token');
+      params.user_email = localStorage.getItem('email');
+      options.params = params;
+      var ft = new FileTransfer();
+      ft.upload(myImg, encodeURI("https://example.com/posts/"), onUploadSuccess, onUploadFail, options);
+  }
+
+
+   
+
+})
+
+.controller('DealDetailCtrl', function ($scope, $stateParams, DealService) {
+    
+    $scope.dealImagePath  = DEAL_IMAGE;
+    $scope.dealIconPath   = DEAL_ICON;
+
+    DealService.findDealById($stateParams.dealId).then(function(deal) {
+        $scope.deal   = deal.data;
+        $scope.dealId = $stateParams.dealId;
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Generated by CoffeeScript 1.9.1
+(function() {
+  angular.module('ionic.rating', []).constant('ratingConfig', {
+    max: 5,
+    stateOn: null,
+    stateOff: null
+  }).controller('RatingController', function($scope, $attrs, ratingConfig) {
+    var ngModelCtrl;
+    ngModelCtrl = {
+      $setViewValue: angular.noop
+    };
+    this.init = function(ngModelCtrl_) {
+      var max, ratingStates;
+      ngModelCtrl = ngModelCtrl_;
+      ngModelCtrl.$render = this.render;
+      this.stateOn = angular.isDefined($attrs.stateOn) ? $scope.$parent.$eval($attrs.stateOn) : ratingConfig.stateOn;
+      this.stateOff = angular.isDefined($attrs.stateOff) ? $scope.$parent.$eval($attrs.stateOff) : ratingConfig.stateOff;
+      max = angular.isDefined($attrs.max) ? $scope.$parent.$eval($attrs.max) : ratingConfig.max;
+      ratingStates = angular.isDefined($attrs.ratingStates) ? $scope.$parent.$eval($attrs.ratingStates) : new Array(max);
+      return $scope.range = this.buildTemplateObjects(ratingStates);
+    };
+    this.buildTemplateObjects = function(states) {
+      var i, j, len, ref;
+      ref = states.length;
+      for (j = 0, len = ref.length; j < len; j++) {
+        i = ref[j];
+        states[i] = angular.extend({
+          index: 1
+        }, {
+          stateOn: this.stateOn,
+          stateOff: this.stateOff
+        }, states[i]);
+      }
+      return states;
+    };
+    $scope.rate = function(value) {
+      if (!$scope.readonly && value >= 0 && value <= $scope.range.length) {
+        ngModelCtrl.$setViewValue(value);
+        return ngModelCtrl.$render();
+      }
+    };
+    $scope.reset = function() {
+      $scope.value = ngModelCtrl.$viewValue;
+      return $scope.onLeave();
+    };
+    $scope.enter = function(value) {
+      if (!$scope.readonly) {
+        $scope.value = value;
+      }
+      return $scope.onHover({
+        value: value
+      });
+    };
+    $scope.onKeydown = function(evt) {
+      if (/(37|38|39|40)/.test(evt.which)) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        return $scope.rate($scope.value + (evt.which === 38 || evt.which === 39 ? {
+          1: -1
+        } : void 0));
+      }
+    };
+    this.render = function() {
+      return $scope.value = ngModelCtrl.$viewValue;
+    };
+    return this;
+  }).directive('rating', function() {
+    return {
+      restrict: 'EA',
+      require: ['rating', 'ngModel'],
+      scope: {
+        readonly: '=?',
+        onHover: '&',
+        onLeave: '&'
+      },
+      controller: 'RatingController',
+      template: '<ul class="rating" ng-mouseleave="reset()" ng-keydown="onKeydown($event)">' + '<li ng-repeat="r in range track by $index" ng-click="rate($index + 1)"><i class="icon" ng-class="$index < value && (r.stateOn || \'ion-ios-star\') || (r.stateOff || \'ion-ios-star-outline\')"></i></li>' + '</ul>',
+      replace: true,
+      link: function(scope, element, attrs, ctrls) {
+        var ngModelCtrl, ratingCtrl;
+        ratingCtrl = ctrls[0];
+        ngModelCtrl = ctrls[1];
+        if (ngModelCtrl) {
+          return ratingCtrl.init(ngModelCtrl);
+        }
+      }
+    };
+  });
+
+}).call(this);

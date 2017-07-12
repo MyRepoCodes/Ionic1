@@ -1,0 +1,70 @@
+<ion-view view-title="Forgot Password">
+  
+  <div class="bar bar-header bar-transparent">
+    <a class="button icon ion-chevron-left translucent-button pink-colo-font" href="#/landing"></a>
+  </div>
+
+  <ion-content class="landing-home">    
+  
+    <div class="row welcome-logo">
+      <div class="col home-image"> 
+        <img src="img/logo.png">
+      </div>
+    </div>
+      
+      <div class="padding landing-page-sigin-block">
+        <form name="forgot" ng-submit="forgotPassword(user)" novalidate>
+        <div class="list list-inset">
+
+          <label class="item item-input" ng-class="{ 'has-error' : forgot.email.$invalid && !forgot.email.$pristine }">
+              <i class="icon ion-email placeholder-icon"></i>
+              <input  type="email" 
+                    placeholder="Email" 
+                    name="email"
+                    ng-model="user.email"
+                    required
+                    >
+          </label>
+          <div class="form-error" ng-show="forgot.email.$invalid && !forgot.email.$pristine" >Enter a valid email.
+          </div>
+
+          <button class="button button-block button-login" type="submit" ng-disabled="forgot.$invalid">
+            Submit & Get Password
+          </button>
+          <p class="text-center signup-forget-link-block">
+            <a href="#/landing" class="fp-link">Already Member?</a>
+          </p>          
+
+        </div>
+       
+      </form>     
+      </div>
+       
+  </ion-content>
+</ion-view>
+<!--ion-header-bar class="pink-white-theme-color">
+  <h1 class="title">
+    <div class="inner-logo"> 
+      <img src="img/logo.png">
+    </div>
+  </h1>
+  <div class="buttons">
+    <button class="button pink-white-theme-color" ng-click="gotoLogin()">Login</button>
+  </div>
+</ion-header-bar>
+
+<ion-view view-title="Sign-In">
+  <ion-content>
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Email</span>
+        <input type="text" ng-model="user.email">
+      </label>
+    </div>
+    <div class="padding">
+      <button class="button button-block pink-white-theme-color" ng-click="signIn(user)">
+        Submit
+      </button>
+    </div>
+  </ion-content>
+</ion-view-->

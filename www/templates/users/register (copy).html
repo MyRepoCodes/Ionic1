@@ -1,0 +1,152 @@
+<ion-header-bar class="pink-theme-color">
+  <h1 class="title">
+    <div class="inner-logo"> 
+      <img src="img/logo.png">
+    </div>
+  </h1>
+  <div class="buttons">
+    <button class="button pink-white-theme-color" ng-click="gotoLogin()">Login</button>
+  </div>
+</ion-header-bar>
+
+<ion-view view-title="Register">
+  <ion-content>
+    <div class="list">
+      <form name="signupForm" ng-submit="signup(user)" novalidate>
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : signupForm.firstname.$invalid}">
+          <span class="input-label">First Name</span>
+          <input type="text" placeholder="First Name"
+              name="firstname"
+              ng-model="user.firstname" 
+              ng-minlength="5" 
+              ng-maxlength="10" 
+              required>
+        </label>
+        <div class="form-errors" ng-messages="signupForm.firstname.$error" ng-messages-include="templates/form-errors.html">  
+          <div class="form-error" ng-message="maxlength">This field is must be less than 10 characters</div>  
+        </div>
+
+
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Last Name</span>
+          <input type="text" placeholder="Last Name"
+              name="lastname"
+              ng-model="user.lastname"
+              >
+        </label>
+
+
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : signupForm.phone.$invalid}">
+          <span class="input-label">Phone</span>
+          <input type="number" placeholder="Phone" 
+              name="phone"
+              ng-model="user.phone"
+              required
+              >
+        </label>
+        <div class="form-errors" ng-messages="signupForm.phone.$error" ng-messages-include="templates/form-errors.html">
+        </div>
+
+
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : signupForm.email.$invalid}">
+          <span class="input-label">Email</span>
+          <input  type="email" 
+                  placeholder="Email" 
+                  name="email"
+                  ng-model="user.email"
+                  required
+                  >
+        </label>
+        <div class="form-errors" ng-messages="signupForm.email.$error" ng-messages-include="templates/form-errors.html">
+        </div>
+
+
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : signupForm.password.$invalid}">
+          <span class="input-label">Password</span>
+          <input  type="password" placeholder="Password"
+                  name="password"
+                  ng-model="user.password"
+                  required
+                  >
+        </label>
+        <div class="form-errors" ng-messages="signupForm.password.$error" ng-messages-include="templates/form-errors.html">
+        </div>
+
+
+
+        <div class="item item-divider"> 
+          Gender
+        </div>
+        <ion-radio ng-model="user.gender" ng-value="'m'">Male</ion-radio>
+        <ion-radio ng-model="user.gender" ng-value="'f'">Female</ion-radio>
+
+
+
+        <label class="item item-input item-floating-label" ng-class="{ 'has-error' : signupForm.zip.$invalid}">
+          <span class="input-label">Zip Code</span>
+          <input  type="number" placeholder="Residence Zip Code" 
+                  name="zip"
+                  ng-model="user.zip"
+                  required
+                  >
+        </label>        
+        <div class="form-errors" ng-messages="signupForm.zip.$error" ng-messages-include="templates/form-errors.html">
+        </div>
+
+
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label">DOB</span>
+          <input type="date" ng-model="user.dob" placeholder="Date Of Birth">
+        </label>
+
+
+
+        <div class="item item-divider" ng-class="{ 'has-error' : signupForm.role.$invalid}"> 
+          Role
+        </div>
+        <ion-radio ng-model="user.role" ng-value="'1'" required>Business</ion-radio>
+        <ion-radio ng-model="user.role" ng-value="'2'" required>Personal</ion-radio>
+        <div class="form-errors" ng-messages="signupForm.role.$error" ng-messages-include="templates/form-errors.html">
+        </div>
+
+
+        <div class="item item-divider" ng-class="{ 'has-error' : signupForm.agree.$invalid}">
+        <div class="item item-checkbox">
+           <label class="checkbox">
+             <input type="checkbox"
+                    name="agree"
+                    ng-model="user.agree"
+                    required
+                    >
+           </label>
+           Agree to Terms & Conditions
+        </div>
+        <div class="form-errors" ng-messages="signupForm.agree.$error" ng-messages-include="templates/form-errors.html">
+        </div>
+
+
+
+        <div class="padding">
+          <button class="button button-block pink-white-theme-color" ng-disabled="signupForm.$invalid">
+            Register
+          </button>
+        </div>
+      </form>
+    </div>
+    
+  </ion-content>
+</ion-view>
+
+<script id="templates/form-errors.html" type="text/ng-template">  
+  <div class="form-error" ng-message="required">This field is required.</div>
+  <div class="form-error" ng-message="minlength">This field is must be at least 5 characters.</div>
+  <div class="form-error" ng-message="maxlength">This field is must be less than 50 characters.</div>
+  <div class="form-error" ng-message="email">Please enter valid E-mail.</div>
+  <div class="form-error" ng-message="number">Please enter valid Phone number.</div>
+</script>  

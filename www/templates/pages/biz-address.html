@@ -1,0 +1,33 @@
+<ion-view view-title="Biz. Address" cache-view="false" >
+  <ion-nav-buttons side="primary">
+    <button class="button pink-white-theme-color" ng-click="createBizAddrModal()">
+      New Addr.
+    </button>
+  </ion-nav-buttons>
+  <ion-content class="has-tabs">    
+    <ion-list 
+        show-delete="shouldShowDelete"
+        show-reorder="shouldShowReorder"
+        can-swipe="listCanSwipe">
+      <ion-item ng-repeat="singleAddress in businessAddress"
+                class="item item-icon-left"                
+                ng-click="viewAddr(singleAddress._id, singleAddress.biz_zipcode, singleAddress.biz_address, singleAddress.biz_city, singleAddress.biz_state, singleAddress.biz_country, singleAddress.biz_name)">
+                <!-- href="#/app/biz-address/{{singleAddress._id}}" -->
+        <i class="icon ion-location"></i>
+        {{singleAddress.biz_address}}
+        <ion-option-button 
+            class="button-assertive"
+            ng-click="deleteBizAddr(singleAddress._id, $index)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>    
+    <div class="row responsive-sm">
+      <div class="col">
+        <h2 ng-show="!businessAddress.length" class="nothing-found-block">
+          <i class="icon ion-android-alert"></i> No Address Found!
+        </h2>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

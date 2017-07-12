@@ -1,0 +1,72 @@
+<ion-view view-title="Waiting Notif.(Future Deals)" hide-back-button="true" cache-view="false"> 
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals     
+    </a>
+  </ion-nav-buttons>
+  <ion-content class="has-tabs" drag-content="false">
+
+    <ion-list 
+          show-delete="shouldShowDelete"
+          show-reorder="shouldShowReorder"
+          can-swipe="listCanSwipe">
+      <ion-item ng-repeat="deal in myFutureDeals"
+                class="item-thumbnail-left">
+
+          <img  ng-src="{{dealImagePath}}{{deal.deal_photo}}" 
+                err-src="./img/noimage2.png" 
+                ng-click="view(deal._id)">
+
+          <div class="single-deal-head">
+            <div class="single-deal-head-left-block">
+              <h2>{{deal.deal_name}}</h2>
+              <p>by <span class="deal-owner-name">Me</span></p>
+            </div> 
+            <div class="single-deal-head-right-block">
+              <p class="deal-price" >
+                <span class="rated-stars">
+                  <i class="icon ion-star assertive" ng-repeat="n in [] | ratingstar:deal.deal_rating_count"></i>
+                </span>
+                <span class="unrated-stars">
+                  <i class="icon ion-ios-star-outline assertive" ng-repeat="n in [] | ratingstar:5-deal.deal_rating_count"></i>
+                </span>
+              </p>
+              <p ng-if="deal.deal_price != null && deal.deal_price != '0'" class="deal-price" >${{deal.deal_price}}</p>
+              <p ng-if="deal.deal_price == null || deal.deal_price == '0'" class="deal-price" >Offer!</p>
+            </div>            
+          </div>          
+          
+          <p class="deal-short-description">{{deal.deal_short_desc}}</p>
+          
+          <div class="row deal-sharing-n-review">
+            <div class="col col-66 deal-rating">
+              {{deal.deal_review_count}} Reviews
+            </div>
+            <div class="col col-33 deal-sharing">
+            </div>
+          </div>        
+        
+          <ion-option-button 
+                            class="button-balanced"
+                            ng-click="editDeal(deal._id, $index)">
+            Edit
+          </ion-option-button>
+        
+      </ion-item>
+    </ion-list>
+
+    <!--ion-infinite-scroll
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll-->
+
+    <div class="row responsive-sm">
+      <div class="col">
+        <h1 ng-show="!myFutureDeals.length" class="nothing-found-block">
+          <i class="icon ion-android-alert"></i> No Deals Listed!
+        </h1>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

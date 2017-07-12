@@ -1,0 +1,66 @@
+<ion-view view-title="Sign-In">
+  <ion-content class="landing-home" scroll="true">    
+      
+      <div class="row welcome-logo">
+	  	<div class="col home-image"> 
+	  		<img src="img/logo.png">
+	  	</div>
+	  </div>
+      
+      <div class="padding landing-page-sigin-block">
+      	<form name="signInForm" ng-submit="signIn(user)" novalidate>
+	      <div class="list list-inset">
+
+	        <label class="item item-input" ng-class="{ 'has-error' : signInForm.email.$invalid && !signInForm.email.$pristine }">
+	            <i class="icon ion-email placeholder-icon"></i>
+	            <input  type="email" 
+	                  placeholder="Email" 
+	                  name="email"
+	                  ng-model="user.email"
+	                  required
+	                  >
+	        </label>
+	        <div class="form-error" ng-show="signInForm.email.$invalid && !signInForm.email.$pristine" >Enter a valid email.
+	        </div>
+
+
+	        <label class="item item-input" ng-class="{ 'has-error' : signInForm.password.$invalid && !signInForm.password.$pristine }">
+	          	<i class="icon ion-key placeholder-icon"></i>
+	          	<input  type="password" 
+	                  placeholder="Password"
+	                  name="password"
+	                  ng-model="user.password"
+	                  required
+	                  >
+	        </label>
+	         <div class="form-error" ng-show="signInForm.password.$invalid && !signInForm.password.$pristine" >Enter a valid password.
+	        </div>
+
+	        <button class="button button-block button-login" type="submit" ng-disabled="signInForm.$invalid">
+	          Sign-In
+	        </button>
+	        <p class="text-center or-block"><span></span></p>
+	        
+	        <a class="button button-block button-signup" href="#/register" ="submit" >
+	          Become a Member
+	        </a>
+
+	        <p class="text-center signup-forget-link-block">
+	          <a href="#/forgot-password" class="sign-up-link">Forgot password?</a>
+	        </p>	        
+	        <!--p class="text-center signup-forget-link-block">
+	          <a href="#/app/create-deal" class="sign-up-link">gateway</a>
+	        </p-->	        
+
+	      </div>
+	     
+	    </form>	    
+      </div>
+       
+       	
+
+  </ion-content>
+  		<!--div class="bar bar-footer bar-transparent home-footer-bar">
+		  <div class="title"><a href="#/forgot-password">Forgot password?</a></div>
+		</div-->
+</ion-view>

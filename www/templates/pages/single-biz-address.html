@@ -1,0 +1,87 @@
+<ion-view view-title="Business Address" hide-back-button="true" cache-view="false">
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals     
+    </a>
+  </ion-nav-buttons>
+  <ion-content>
+    <form name="addBizForm" ng-submit="createBizAddr(address)" novalidate>
+      
+      <div class="list">
+        
+        <!--label class="item item-input item-stacked-label" ng-class="{ 'has-error' : addBizForm.biz_zipcode.$invalid && !addBizForm.biz_zipcode.$pristine }">
+          <span class="input-label">Zipcode</span>
+          <input type="number" placeholder="e.g. 100016" name="biz_zipcode" ng-model="address.biz_zipcode" required>
+        </label>
+        <div class="form-error" ng-show="addBizForm.biz_zipcode.$invalid && !addBizForm.biz_zipcode.$pristine" >Zipcode is required and should be valid
+        </div>
+
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : addBizForm.biz_address.$invalid && !addBizForm.biz_address.$pristine }">
+          <span class="input-label">Complete Address</span>
+          <textarea rows="4" placeholder="e.g. 37 Street Road, Near Mall Road, Texas" name="biz_address" ng-model="address.biz_address" required></textarea>
+        </label>
+        <div class="form-error" ng-show="addBizForm.biz_address.$invalid && !addBizForm.biz_address.$pristine" >Address is required
+        </div-->
+
+<!--         <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : addBizForm.biz_address2.$invalid && !addBizForm.biz_address2.$pristine }">
+          <span class="input-label">Address 1</span>
+          <input type="text" placeholder="e.g. SCO-45" name="biz_address2" ng-model="address.biz_address" required>
+        </label>
+        <div class="form-error" ng-show="addBizForm.biz_address2.$invalid && !addBizForm.biz_address2.$pristine" >Address 1 is required
+        </div> -->
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : addBizForm.biz_name.$invalid && !addBizForm.biz_name.$pristine }">
+          <span class="input-label">Business Name</span>
+          <input type="text" placeholder="e.g. McDonnalds" name="biz_name" ng-model="address.biz_name" required>
+        </label>
+        <div class="form-error" ng-show="addBizForm.biz_name.$invalid && !addBizForm.biz_name.$pristine" >Business name is required
+        </div>
+
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : addBizForm.biz_address.$invalid && !addBizForm.biz_address.$pristine }">
+          <span class="input-label">Your Address</span>
+          <textarea rows="4" placeholder="e.g. 37 Street Road, Downtown, New Jersey" name="biz_address" ng-model="address.biz_address" ng-change="update(address.biz_address)" g-places-autocomplete required></textarea>
+        </label>
+        <div class="form-error" ng-show="addBizForm.biz_address.$invalid && !addBizForm.biz_address.$pristine" >Your Address is required
+        </div>
+
+
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : addBizForm.city.$invalid && !addBizForm.city.$pristine }">
+          <span class="input-label">City</span>
+          <input type="text" placeholder="e.g. New Jersey" name="city" ng-model="address.biz_city" required>
+        </label>
+        <div class="form-error" ng-show="addBizForm.city.$invalid && !addBizForm.city.$pristine" >City is required
+        </div>
+
+
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : addBizForm.state.$invalid && !addBizForm.state.$pristine }">
+          <span class="input-label">State</span>
+          <input type="text" placeholder="e.g. Washington" name="state" ng-model="address.biz_state" required>
+        </label>
+        <div class="form-error" ng-show="addBizForm.state.$invalid && !addBizForm.state.$pristine" >State is required
+        </div>
+
+
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : addBizForm.country.$invalid && !addBizForm.country.$pristine }">
+          <span class="input-label">Country</span>
+          <input type="text" placeholder="e.g. US" name="country" ng-model="address.biz_country" required>
+        </label>
+        <div class="form-error" ng-show="addBizForm.country.$invalid && !addBizForm.country.$pristine" >Country is required
+        </div>
+
+
+        <label class="item item-input item-stacked-label" ng-class="{ 'has-error' : addBizForm.biz_zipcode.$invalid && !addBizForm.biz_zipcode.$pristine }">
+          <span class="input-label">Zipcode</span>
+          <input type="text" placeholder="e.g. 100016" name="biz_zipcode" ng-model="address.biz_zipcode" required>
+        </label>
+        <div class="form-error" ng-show="addBizForm.biz_zipcode.$invalid && !addBizForm.biz_zipcode.$pristine" >Zipcode is required and should be valid
+        </div>
+
+        <div class="padding">
+          <button class="button button-block pink-white-theme-color" type="submit" ng-disabled="addBizForm.$invalid">
+            Save
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </ion-content>
+</ion-view>

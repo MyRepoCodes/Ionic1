@@ -1,0 +1,25 @@
+<ion-view view-title="Hours Used" cache-view="false" >
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals     
+    </a>
+  </ion-nav-buttons>
+  <ion-content class="has-tabs account-page">
+
+    <div ng-repeat="credit in credits">
+      <div class="item item-divider">
+        {{credit.deal_created | date}}
+      </div>
+      <div class="list">
+        <div class="card">
+          <div class="item item-text-wrap">
+            <strong>Deal Name:</strong> {{credit.deal_name}}<br>
+            <strong>Hour Used:</strong> {{credit.deal_salevalue > 0 ? credit.deal_salevalue : 0}} Hours<br>
+            <strong>Validity:</strong> {{credit.deal_hour}} Hours<br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

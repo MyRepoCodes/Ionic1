@@ -1,0 +1,750 @@
+/* Empty. Add your own CSS if you like */
+
+.landing-home{
+	background-image: url('../img/back4.png');
+	background-size: cover;
+}
+.welcome-logo{
+/*	margin-top: 20%;
+	margin-bottom: 20%;*/
+	margin-top: 4em;
+    margin-bottom: 1em;
+}
+.home-image{
+	text-align: center;
+}
+.home-image img{
+	width: 75%;	
+}
+.button-become-member{
+	background-color: #FDF877;
+	color: #696969;
+}
+.button-login{
+	background-color: #EF3A5E;
+	color: #FFF;
+}
+.button-signup {
+	background-color: rgba(239, 58, 94, 0.72);
+	color: rgba(255, 247, 247, 0.88);
+}
+.welcome-text{
+	margin-bottom: 10%;
+}
+.welcome-text h1, .welcome-text p{
+	color: #fff;
+	text-align: center;	
+}
+.pink-colo-font{
+	color: #EF3A5E;
+}
+.pink-theme-color{
+	background-color: #EF3A5E;
+}
+.yellow-theme-color{
+	background-color: #FDF877;
+}
+.pink-white-theme-color{
+	background-color: #EF3A5E;
+	color: #FFF;
+}
+.yellow-white-theme-color{
+	background-color: #FDF877;
+	color: #FFF;
+}
+.inner-logo {
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+.inner-logo img{
+	height: 70%;
+	width: auto;
+	margin-top: 2%;
+}
+.bar-transparent{
+	background-color: transparent;
+}
+.translucent-button{
+	background-color: rgba(255, 255, 255, 0.3);
+}
+.landing-page-sigin-block .card, .landing-page-sigin-block .list-inset {
+    background-color: transparent;
+}
+.landing-page-sigin-block .item {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.landing-page-sigin-block .item-input {
+    border: none;
+    border-bottom: 1px solid #eee;
+}
+.landing-page-sigin-block input, .landing-page-sigin-block i {
+    color: #444 ;
+}
+.landing-page-sigin-block input::-moz-placeholder,
+.landing-page-sigin-block textarea::-moz-placeholder {
+    color: #444;
+}
+.landing-page-sigin-block input::-webkit-input-placeholder{
+    color: #444;
+}
+.landing-page-sigin-block .button-login{
+	border: none;
+	margin-top: 10%;
+}
+.landing-page-sigin-block .button-signup{
+	border: none;
+	/*margin-top: 10%;*/
+}
+.home-footer-bar{
+	background: none;
+}
+.home-footer-bar .title a{
+	text-decoration: none;
+	color: #fff;
+	font-size: 12px;
+}
+.signup-forget-link-block{	
+	/*background: rgba(0,0,0,.3);*/
+	padding: 10px 7px;
+	overflow: hidden;
+	/*box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.65);*/
+}
+.or-block span {
+	background: rgba(0,0,0,.3);
+	color: #eee;
+	padding: 1px;
+	width: 60%;
+	display: inline-block;
+}
+.signup-forget-link-block a.fp-link, .signup-forget-link-block a.sign-up-link{
+	text-decoration: none;
+	color: #fff;
+	font-size: 11px
+}
+.signup-forget-link-block a.fp-link{
+	float: left;
+} 
+.signup-forget-link-block a.sign-up-link{
+	/*float: right;*/
+}
+.pink-white-theme-color.tabs {
+	border: none;
+}
+.nothing-found-block {
+	color: #444;
+}
+.tabs.main-menu-tabs a.tab-item{
+	color: rgba(255, 255, 255, 0.8);
+}
+.signupForm label.item.item-radio, .signupForm .item-content{
+	white-space: normal ;
+}
+.item-divider {
+    background-color: #EFEFEF;
+}
+
+
+
+
+
+/*Left Menu Style*/
+
+.menu-left h1{
+	color: #fff;
+}
+.left-menu i{
+	color: #FFFFFF;
+    background: rgba(239, 58, 94, 0.71);
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+.left-menu a.item-content{
+	text-overflow: clip;
+}
+
+
+/*Deals Styles*/
+.deal-owner-name{
+	text-transform: capitalize;
+	font-size: 10px;
+}
+.deals-listing a h2	{
+	white-space: normal;
+}
+p.deal-price{
+	text-align:right;
+	color: #EF3A5E;
+}
+p.deal-short-description{
+	font-size: 11px;
+    /*line-height: 1.5em;*/
+    white-space: normal;
+}
+.deal-rating{
+	font-size:12px;
+	text-align: left;
+}
+.deal-sharing{
+	text-align:right;
+	font-size: 20px;
+}
+.single-deal-price{
+	position:absolute;
+	top: 4px;
+	right: 3px;
+}
+.inner-deal-details{
+	margin: 0 auto;
+	overflow: hidden;
+}
+.bar-local-national-nav{
+	/*background-color: #444;*/
+	background-color: rgba(68, 68, 68, 0.92);
+	border: medium none;
+}
+.bar-local-national-nav h2.title{
+	color: #fff;
+	font-size: 12px;
+}
+h2.title.local-nav{
+	text-align:right;
+	float: right;
+    margin: 0 0 0 47%;
+    width: 50%;
+}
+h2.title.national-nav{
+	float: left;
+    text-align: left;
+    width: 50%;
+}
+h2.title.local-nav a, h2.title.national-nav a{
+	text-decoration: none;
+}
+h2.deal-name{
+	width: 90%;
+	white-space: normal;
+	color: #313131;
+}
+.deal-price-n-rating{
+	overflow: hidden;
+}
+ul.onlyrating li i {
+	font-size: 25px;
+	/*color: #EF3A5E;*/
+	color: #E4B216;
+}
+.single-deal-head {
+    float: left;
+    left: 0;
+    position: absolute;
+    top: 5px;
+    width: 100%;
+}
+.item-thumbnail-left > img:first-child, 
+.item-thumbnail-left .item-image, 
+.item-thumbnail-left .item-content > img:first-child, 
+.item-thumbnail-left .item-content .item-image {
+    top: 52px;
+}
+.item-thumbnail-left, 
+.item-thumbnail-left .item-content {
+    padding-top: 50px;
+    min-height: 150px;
+    padding-right: 0;
+}
+.past-deals-ion-item.item-thumbnail-left .item-content,
+.favorited-deals-ion-item{
+	min-height: 220px;
+}
+.past-card-wrapper {
+    float: left;
+    left: 0;
+    position: absolute;
+    bottom: -1px;
+    width: 100%;
+    font-size: 12px;
+}
+.past-card-wrapper .card {
+    border: 1px solid #E6E3E3;
+}
+.past-card-wrapper .item{
+    padding: 8px;
+    font-size: 12px;
+}
+.single-deal-head-left-block{
+    box-sizing: border-box;
+    float: left;
+    padding-left: 3%;
+    width: 50%;
+}
+.single-deal-head-right-block{
+	float: right;
+	width: 50%;
+	box-sizing: border-box;
+    padding-right: 3%;
+}
+.single-deal-head-left-block h2 {
+    color: #444;
+    font-size: 14px;
+}
+.single-deal-head-left-block p {
+    font-size: 8px;
+}
+.profile-info.list strong{
+	color: #424242;
+}
+.profile-info.list .item-note {
+	color: #7E7E7E;
+}
+.deal-sharing-n-review.row{
+	padding-left: 0;
+}
+.deal-sharing-n-review.row .col{
+	padding-left: 0;
+}
+.rated-stars{
+	margin-right: -4px;
+}
+.rated-stars-single-deal{
+	margin-right: -6px;
+}
+.rated-stars-single-deal i, .unrated-stars-single-deal i{
+	margin-right: 6px;
+}
+.rated-stars i, .unrated-stars i{
+	margin-right: 2px;
+}
+.deal-owner-name-single-deal{
+	font-size: 12px;
+}
+.only-rating-stars{
+	float: left;
+	width: 50%;
+	padding-left: 10px;
+	font-size: 20px;
+	box-sizing: border-box;
+}
+.only-flag-deal{
+	width: 50%;
+	float: left;
+	text-align: right;
+	box-sizing: border-box;
+	color: #444;
+}
+.card.inner-deal-card {
+	margin: 10px 0px;
+}
+.single-deal-avatar-head{
+	padding-top: 25px;
+}
+.single-deal-avatar-head.item-avatar img{
+	top: 25px;
+}
+.single-deal-avatar-head.item-avatar span{
+	color: #EF3A5E;
+}
+
+
+
+
+
+
+/** Styling for the username field **/
+label.item.has-error {  
+  border-bottom: 2px solid red;
+}
+
+/** Styling for the password field when an error exists**/
+label.item.has-error-lr {  
+  border-left: 2px solid red;
+  border-right: 2px solid red;
+}
+
+/** Styling for the password field when an error has been resolved**/
+label.item.valid-lr {  
+  border-left: 2px solid green;
+  border-right: 2px solid green;
+}
+
+/** Styling for the error text and container **/
+.form-errors {
+  margin: 5px 0
+}
+.form-error {
+  padding: 2px 0 2px 16px;
+  color: #D45A5A;
+}
+
+/*For Rating System*/
+
+ul.rating li {
+  display: inline;
+  border: 0px;
+  background: none;
+  padding: 5px 10px;
+}
+ul.rating li i {
+  font-size: 30px;
+}
+
+/*rate-modal*/
+.rate-modal{
+	background-color: rgba(39, 39, 39, 0.72);
+}
+.rate-modal .title{
+	color:#FFF;
+}
+.rate-modal .button{
+	color:#FFF;
+	border: none;
+}
+.rate-modal .button.close-button{
+	border-color:#FFF;
+}
+.rate-modal .item{
+	background-color: rgba(255,255,255,.01);
+	border:none;
+}
+.rate-modal .item i{
+	color:#FC0;
+}
+.review-modal .title{
+	color:#FFF;
+}
+.review-modal .button{
+	color:#FFF;
+}
+.review-modal .button.close-button{
+	border-color:#FFF;
+}
+
+
+
+
+
+/* For User Profile Page */
+
+#profile-bg {
+    position: fixed;
+    left: 0;
+    /*top: -151px;*/
+    width: 100%;
+    height: 150px;
+
+    background: url('../img/bg.jpg') no-repeat transparent;
+    background-size: 100%;
+    background-position: 50% 20%;
+
+    text-align: center;
+  }
+
+  #content {
+    position: relative;
+    /*margin-top: 150px;*/
+    /*top: 150px;*/
+    bottom: 0px;
+    background-color: white;
+    box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
+    /*padding-top: 200px;*/
+  }
+
+  #profile-info {
+    position: relative;
+    top: -30px;
+    width: 100%;
+    z-index: 2;
+    text-align: center;
+    background: #ECECEC;
+    padding: 10px;
+  }
+  #profile-name {
+    color: #444;
+    font-size: 26px;
+  }
+  #profile-description {
+    font-size: 15px;
+    color: #888;
+  }
+  #profile-description a {
+    color: #888;
+  }
+
+  #profile-image {
+    display: block;
+    border-radius: 100px;
+    border: 1px solid #fff;
+    width: 128px;
+    height: 128px;
+    margin: 30px auto 0;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+  }
+
+  .list-item-content {
+    padding: 5px;
+  }
+
+  .list-item {
+    color: #666666;
+  }
+
+  .post {
+    color: #444;
+  }
+
+  .post-time {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 11px;
+    color: #888;
+  }
+
+  .post-profile-image {
+    display: inline-block;
+    vertical-align: top;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+  }
+  .post-options {
+    position: absolute;
+    font-size: 16px;
+    right: 5px;
+    bottom: 5px;
+    color: #888;
+  }
+form[name="editableForm"] > div {
+  height: auto;
+  padding: 5px 0;
+}
+
+form[name="editableForm"] .title {
+  display: inline-block;
+  font-weight: bold;
+  /*padding-top: 5px;*/
+  vertical-align: top;
+  min-width: 90px;
+}
+
+form[name="editableForm"] .editable {
+  display: inline-block;
+  /*padding-top: 5px;*/
+  vertical-align: top;
+}
+
+form[name="editableForm"] select {
+  width: 120px;
+}
+
+form[name="editableForm"] input {
+  height: auto;
+}
+.edit-profile-button-block{
+	border: none;
+}
+.text-align-right{
+	text-align: right;
+}
+.app-invitation-icon{
+	vertical-align: middle;
+	font-size: 22px;
+}
+.edit-span {
+	display: inline-block;
+	width: 100%;
+}
+
+
+
+
+/*Map*/
+
+#map{
+	height: 600px;
+}
+#gmaps {
+    width: 450px;
+    height: 450px;
+}
+
+
+
+/*  Accordion Tabs For Deal Categories */
+
+.list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  /*transition: 0.09s all linear;*/
+  transition: 0.2s all linear;
+}
+.item-accordion a {
+  text-decoration: none;
+  color: #333;
+  width: 100%;
+  display: inline-block;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+
+
+
+/*Create deal*/
+.create-deal .input-label{
+	color: #555;
+}
+.create-deal input{
+	color: #666;
+}
+.item-stacked-label-grey {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+.notify-message-button.button.button-balanced.button-outline{
+    width: 100%;
+    background: rgba(51, 205, 95, 0.15);
+}
+
+
+/* signupForm */
+.signupForm strong{
+	color: #444;
+}
+.signupForm input{
+	color: #666;
+}
+
+
+/*Credits*/
+.packages-listing .col{
+	text-align: center;
+	height: 60px;
+	line-height: 60px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.toggle.toggle-pink input:checked + .track {
+	border-color: #EF3A5E;
+	background-color: #EF3A5E;
+}
+.button-outline.button-outline.buy-credit-button {
+	border-color: #EF3A5E;
+	background: #f8f8f8; 
+	color: #EF3A5E;
+	border-radius: 7px;
+	min-height: 45px;
+	width: 100%;
+}
+.button-outline.button-outline.payment-history-button {
+	border-color: #EF3A5E;
+	background: #f8f8f8; 
+	color: #EF3A5E;
+	border-radius: 7px;
+	min-height: 40px;
+}
+.account-page .list{
+	margin-bottom: 0;
+}
+.packages-listing .button{
+	padding: 0 8px;
+}
+
+
+
+/*social-icons-modal*/
+.social-icons-modal{
+	font-size: 40px;
+	color: #fff;
+}
+.social-icons-modal .col{
+	text-align: center;
+}
+
+
+
+
+/*rate-modal*/
+.share-modal{
+	background-color: rgba(39, 39, 39, 0.72);
+}
+.share-modal .title{
+	color:#FFF;
+}
+.share-modal .button{
+	color:#FFF;
+}
+.share-modal .button.close-button{
+	border-color:#FFF;
+}
+.share-modal .item{
+	background-color: rgba(255,255,255,.01);
+	border:none;
+}
+.share-modal .item i{
+	color:#FC0;
+}
+.share-modal .title{
+	color:#FFF;
+}
+.share-modal .button{
+	color:#FFF;
+}
+.share-modal .button.close-button{
+	border-color:#FFF;
+}
+
+
+/*Popover*/
+.deal-filter-popover.popover {
+	height: 320px;
+}
+.deal-filter-popover.popover input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+    font-size: 11px;
+}
+.button-popover {
+    width: 100%;
+    min-height: 18px;
+    height: 28px;
+    line-height: inherit;
+    background: rgba(238, 238, 238, 0.84) !important;
+    border: 1px solid rgba(156, 156, 156, 0.11) !important;
+}
+.button-popover.button .icon:before, 
+.button-popover.button .icon-left:before, 
+.button-popover.button .icon-right:before {    
+    padding: 0 6px 1px 0;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.modal-open {
+    pointer-events: all;
+}
+.single-deal-list-card .item .badge {
+    right: 20px;
+}
+.single-deal-list-card .item-icon-left {
+    padding-left: 35px;
+}
+.single-deal-list-card .item-icon-left .icon {
+    left: 6px;
+}
+.custom-badge {
+
+
+  font-size:12px !important;
+}
+.custom-tab{
+margin:42px 0 0 0; 
+}
+
+
+#onlyMap{
+  display: none;
+}

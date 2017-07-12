@@ -1,0 +1,208 @@
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content>
+    <ion-nav-bar class="pink-white-theme-color">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button ng-click="updateMenuContent()" class="button button-icon button-clear button-light ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="pink-white-theme-color">
+      <h1 class="title">123Deals4U</h1>
+    </ion-header-bar>
+    <ion-content class="has-tabs left-menu">
+      <ion-list>
+        <!--ion-item menu-close ng-click="login()">
+          Login
+        </ion-item-->
+
+        <!--div ng-if="userData.usertype == '1'">
+          <ion-item           
+            ng-click="toggleGroupCenter(groupCenter)"
+            ng-class="{active: isGroupShownCenter(groupCenter)}"
+            >
+            <i class="icon ion-android-calendar"></i> Deals Center
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isGroupShownCenter(groupCenter)">
+              <a menu-close href="#/app/past-deals">Past Deals</a>
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isGroupShownCenter(groupCenter)">
+              <a menu-close href="#/app/my-deals">Active Deals</a>
+          </ion-item>
+        </div-->
+
+        <div class="item item-divider"> 
+          <Strong>Explore Deals</Strong>
+        </div>
+        <ion-item           
+          ng-click="toggleGroup(group)"
+          ng-class="{active: isGroupShown(group)}"
+          >
+          <i class="icon ion-bag"></i> Deals Categories
+        </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(group)">
+            <a menu-close href="#/app/deals">All Deals</a>
+        </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(group)">
+            <a menu-close href="#/app/national-deals">National Deals</a>
+        </ion-item>
+        <ion-item class="item-accordion"
+                  ng-show="isGroupShown(group)">
+            <a menu-close href="#/app/local-deals">Local Deals</a>
+        </ion-item>            
+        <ion-item class="item-accordion"
+                  ng-repeat="category in dealCategories"
+                  ng-show="isGroupShown(group)">
+            <a menu-close href="#/app/cat-deals/{{category._id}}/{{category.category_name}}">{{category.category_name}}</a>
+        </ion-item>
+        <ion-item menu-close href="#/app/my-reviews">
+          <i class="icon ion-android-textsms"></i> My Reviews
+        </ion-item>
+        <ion-item menu-close href="#/app/my-favorites">
+          <i class="icon ion-star"></i> My Favorite Deals
+        </ion-item>
+
+
+        
+        
+        <div ng-if="userData.usertype == '1'">
+          <div class="item item-divider"> 
+            <Strong>My Business</Strong>
+          </div>
+          <!--ion-item menu-close href="#/app/my-deals" >
+            <i class="icon ion-calendar"></i> My Deals(Active & Past)
+          </ion-item-->
+          <ion-item           
+            ng-click="toggleMyDealGroup(groupMyDeal)"
+            ng-class="{active: isMyDealGroupShown(groupMyDeal)}"
+            >
+            <i class="icon ion-android-calendar"></i> My Deals (Un/Published)
+          </ion-item>
+          <!--ion-item class="item-accordion" ng-show="isMyDealGroupShown(groupMyDeal)">
+              <a menu-close href="#/app/my-published-deals">Published Deals ({{dealsCounts.publish}})</a>
+          </ion-item-->
+          <ion-item class="item-accordion" ng-show="isMyDealGroupShown(groupMyDeal)">
+              <a menu-close href="#/app/my-published-deals">Waiting Notification ({{dealsCounts.future}})</a>
+
+
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isMyDealGroupShown(groupMyDeal)">
+              <a menu-close href="#/app/deals-to-be-notify">In Notification ({{dealsCounts.notification_deals}})</a>
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isMyDealGroupShown(groupMyDeal)">
+              <a menu-close href="#/app/active-deals">Active Deals ({{dealsCounts.active}})</a>
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isMyDealGroupShown(groupMyDeal)">
+              <a menu-close href="#/app/my-unpublished-deals">To Publish Deals ({{dealsCounts.unpublish}})</a>
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isMyDealGroupShown(groupMyDeal)">
+              <a menu-close href="#/app/past-deals">My Published Deals ({{dealsCounts.past}})</a>
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isMyDealGroupShown(groupMyDeal)">
+              <a menu-close href="#/app/deals-favorited-by-bizuser">My Favorite Deals ({{dealsCounts.performance}})</a>
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isMyDealGroupShown(groupMyDeal)">
+              <a menu-close href="#/app/deals-reviewed-by-bizuser">Deals Reviewed ({{dealsCounts.reviews}})</a>
+          </ion-item>
+          <ion-item           
+            ng-click="toggleCreateDealGroup(groupCreateDeal)"
+            ng-class="{active: isCreateDealGroupShown(groupCreateDeal)}"
+            >
+            <i class="icon ion-android-calendar"></i> Create Deals (Get Customers)
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isCreateDealGroupShown(groupCreateDeal)">
+              <a menu-close href="#/app/create-deal">New form Scratch</a>
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isCreateDealGroupShown(groupCreateDeal)">
+              <a menu-close href="#/app/create-deal-by-clone">New By Cloning</a>
+          </ion-item>
+
+          <ion-item menu-close href="#/app/deals-to-be-notify" >
+            <i class="icon ion-bag"></i> Deals To Be Notify
+          </ion-item>
+          <!--ion-item menu-close href="#/app/create-deal" >
+            <i class="icon ion-plus-round"></i> Create Deals (Get Customers)
+          </ion-item-->
+          <ion-item menu-close href="#/app/biz-address" >
+            <i class="icon ion-location"></i> Biz. Addr. (Add, Update)
+          </ion-item>
+          <!--ion-item menu-close href="#/app/credits" >
+            <i class="icon ion-card"></i> Current Credits (Buy, Manage)
+          </ion-item-->
+
+
+          <ion-item           
+            ng-click="toggleCreditsGroup(groupCredits)"
+            ng-class="{active: isCreditsGroupShown(groupCredits)}"
+            >
+            <i class="icon ion-card"></i> Current Hours (Buy, Manage)
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isCreditsGroupShown(groupCredits)">
+              <a menu-close href="#/app/credits">Buy Hours</a>
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isCreditsGroupShown(groupCredits)">
+              <a menu-close href="#/app/purchase-history">Purchase History</a>
+          </ion-item>
+
+        </div>
+
+        
+        <div class="item item-divider"> 
+          <Strong>General</Strong>
+        </div>
+        <ion-item menu-close href="#/app/contact-admin-inner">
+          <i class="icon ion-android-mail"></i> Contact US
+        </ion-item>
+        <ion-item menu-close href="#/app/faq">
+          <i class="icon ion-clipboard"></i> FAQ
+        </ion-item>
+        <ion-item menu-close href="#/app/about">
+          <i class="icon ion-person-stalker"></i> About 123Deals4U
+        </ion-item>
+        <ion-item menu-close ng-click="pickContactUsingNativeUI()">
+          <i class="icon ion-android-share-alt"></i> Invite Friends
+        </ion-item>
+        <ion-item menu-close ng-click="logout()" >
+          <i class="icon ion-log-out"></i> Logout
+        </ion-item>
+
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
+
+<div class="tabs tabs-icon-bottom pink-white-theme-color tabs-color-light main-menu-tabs">
+  
+  <a class="tab-item" ng-click="pickContactUsingNativeUI()">
+    <i class="icon ion-android-share-alt"></i>
+    Invite
+  </a>
+  <a class="tab-item" href="#/app/settings">
+    <i class="icon ion-gear-a"></i>
+    Settings
+  </a>
+  <a class="tab-item" href="#/app/deals">
+    <i class="icon ion-home"></i>
+    Home
+  </a>
+  <a class="tab-item" href="#/app/profile">
+    <i class="icon ion-android-person"></i>
+    Profile
+  </a>
+  <a class="tab-item" ng-click="refreshApp()" >
+    <i class="icon ion-refresh"></i>
+    Refresh
+  </a>
+  <!-- <a class="tab-item" ng-click="logout()" >
+    <i class="icon ion-log-out"></i>
+    Log Out
+  </a> -->
+</div>

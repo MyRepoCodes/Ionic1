@@ -1,0 +1,31 @@
+<ion-popover-view class="deal-filter-popover">
+    <ion-content>
+      <div class="list">
+
+        <div class="item item-input-inset">
+          <button class="button button-clear">Filter By Date</button>
+        </div>
+
+        <div class="item item-input-inset">
+          <button class="button button-clear">From :</button>
+          <label class="item-input-wrapper">
+            <input type="date" name="from_date" ng-model="filter.from_date" placeholder="">
+          </label>
+        </div>
+
+        <div class="item item-input-inset">
+          <button class="button button-clear">To :</button>
+          <label class="item-input-wrapper">
+            <input type="date" name="from_date" ng-model="filter.to_date" placeholder="">
+          </label>
+        </div>
+
+        <div class="item">
+          <button class="button button-popover button-stable" ng-click="setHistoryRange(filter)">
+            Filter
+          </button>
+        </div>
+
+      </div>
+    </ion-content>
+  </ion-popover-view>

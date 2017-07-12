@@ -1,0 +1,62 @@
+<ion-popover-view class="deal-filter-popover">
+    <ion-content>
+      <div class="list">
+        <div class="item item-input-inset">
+          <button class="button button-clear" ng-click="searchDealByZip(deal_search_zipcode)"><i class="ion ion-search"></i></button>
+          <label class="item-input-wrapper">
+            <input type="text" ng-model="filter.deal_keyword" placeholder="Search By Keyword">
+          </label>
+          <!--button class="button button-icon icon ion-android-search" ng-click="searchDeal(deal_keyword)"></button-->
+        </div>
+        <div class="item item-input-inset">
+          <button class="button button-clear" ng-click="searchDealByZip(deal_search_zipcode)"><i class="ion ion-search"></i></button>
+          <label class="item-input-wrapper">
+            <input type="text" ng-model="filter.deal_search_zipcode" placeholder="By Zip, City or Country">
+          </label>
+          <!--button class="button button-icon icon ion-android-search" ng-click="searchDealByZip(deal_search_zipcode)"></button-->
+        </div>
+        <!--div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <input type="text" ng-model="deal_search_city" placeholder="By City, Country">
+          </label>
+          <button class="button button-icon icon ion-android-search" ng-click="searchDealByCity(deal_search_city)"></button>
+        </div-->
+        <div class="item item-input-inset">
+          <button class="button button-clear"><i class="ion ion-search"></i></button>
+          <label class="item-input-wrapper">
+            <!--i class="icon ion-navigate placeholder-icon"></i-->
+            <input type="number" ng-model="filter.range" name="range" placeholder="Range in Miles">
+          </label>
+          <!-- <button class="button button-icon button-stable" ng-click="setDealRange(filter)">
+            Set
+          </button> -->
+        </div>
+        <div class="item">
+            <button class="button button-popover button-stable" ng-click="setDealRange(filter)">
+              Save Setting
+            </button>
+        </div>
+
+        <!--ion-radio name="dealSearchType" ng-model="filter.dealSearchType" value='latest' >Latest Deals</ion-radio>
+        <ion-radio name="dealSearchType" ng-model="filter.dealSearchType" value='popular' >Popular Deals</ion-radio-->
+
+        <!--a class="item" href="#/app/deals/latest" ng-click="closePopover()">
+          Latest Deals
+        </a>
+        <a class="item" href="#/app/deals/popular" >
+          Popular Deals
+        </a-->
+             
+        <!--a class="item" href="#/app/deals/favorite" >
+          Favorite Deals
+        </a>
+        <a class="item" href="#/app/deals/by-price-low-high" >
+          Sort By Price Low to High
+        </a>
+        <a class="item" href="#/app/deals/by-price-high-low" >
+          Sort By Price High to Low
+        </a-->
+
+      </div>
+    </ion-content>
+  </ion-popover-view>

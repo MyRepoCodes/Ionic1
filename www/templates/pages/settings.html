@@ -1,0 +1,36 @@
+<ion-view view-title="Settings">
+  <ion-content>    
+    <div class="list">
+      <!--a class="item item-icon-left" href="#/app/about">
+        <i class="icon ion-android-hangout"></i>
+        About App
+      </a-->
+      <a class="item item-icon-left" href="#/app/credits">
+        <i class="icon ion-cash"></i>
+        Account
+        <!--i class="icon ion-ios-telephone-outline"></i-->
+      </a>
+      <a class="item item-icon-left" href="#/app/profile">
+        <i class="icon ion-person-stalker"></i>
+        Profile
+      </a>
+      <a class="item item-icon-left" ng-click="shareApp()">
+        <i class="icon ion-android-call"></i>
+        Tell a Friend
+      </a>
+      <a class="item item-icon-left" href="#/app/notifications">
+        <i class="icon ion-android-globe"></i>
+        Notifications
+        <span class="badge badge-assertive">{{notificationsCount}}</span>
+      </a>
+      <a class="item item-icon-left" ng-click="changeSharingText()">
+        <i class="icon ion-compose"></i>
+        Change Sharing Text
+      </a>
+      <a class="item item-icon-left" ng-click="changeInviteText()">
+        <i class="icon ion-compose"></i>
+        Change Invite Text
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

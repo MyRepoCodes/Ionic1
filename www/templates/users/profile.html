@@ -1,0 +1,148 @@
+<ion-view view-title="Profile" cache-view="false">
+  
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals
+    </a>
+  </ion-nav-buttons>
+  
+  <ion-content class="has-tabs">
+      <!--div id="profile-bg"></div-->
+     
+        <div id="profile-info">
+          <img id="profile-image" src="{{profilePicPath}}{{userProfileData.photo}}"  err-src="./img/photo_unavailable2.jpg" >
+          <h3 id="profile-name">{{userProfileData.first_name}} {{userProfileData.last_name}}</h3>
+          <span id="profile-description">{{userProfileData.email}}</span>
+        </div>
+
+        <form editable-form name="editableForm" onaftersave="saveUser(userProfileData)">
+          
+          <div class="row">
+            <div class="col col-50">
+              <button class="button button-clear pink-white-theme-color" type="button" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                <i class="icon ion-compose"></i> Edit
+              </button>
+            </div>
+            <div class="col col-50 text-align-right">
+              <button class="button button-clear pink-white-theme-color" type="button" ng-click="changePasssword()" >
+                <i class="icon ion-key"></i> Password
+              </button>
+            </div>
+          </div>
+          
+
+          <div class="list profile-info">
+
+            <div class="item" >
+              <strong>Email</strong>
+              <span  class="item-note" >
+                {{userProfileData.email}}
+              </span>
+            </div>
+
+            <div class="item">
+              <strong>First Name</strong>
+              <span class="item-note">
+                <span editable-text="userProfileData.first_name" e-name="userProfileData.first_name" e-required>
+                  {{userProfileData.first_name}}
+                </span>                
+              </span>
+            </div>
+
+            <div class="item">
+              <strong>Last Name</strong>
+              <span class="item-note">
+                <span editable-text="userProfileData.last_name" e-name="userProfileData.last_name" e-required>
+                  {{userProfileData.last_name}}
+                </span>
+              </span>
+            </div>
+
+            <div class="item">
+              <strong>Phone</strong>
+              <span class="item-note">
+                <span editable-text="userProfileData.phone" e-name="userProfileData.phone" e-required>
+                  {{userProfileData.phone}}
+                </span>
+              </span>
+            </div>
+
+            <div class="item">
+              <strong>Gender</strong>
+              <span class="item-note" ng-if="userProfileData.gender == 'm'">
+                Male
+              </span>
+              <span class="item-note" ng-if="userProfileData.gender == 'f'">
+                Female
+              </span>
+            </div>
+
+            <div class="item">
+              <strong>Zip</strong>
+              <span class="item-note">
+                <span editable-text="userProfileData.zipcode" e-name="userProfileData.zipcode" e-required>
+                  {{userProfileData.zipcode}}
+                </span>
+              </span>
+            </div>
+
+            <div class="item" >
+              <strong>Date Of Birth</strong>
+              <span class="item-note">
+                <span editable-text="userProfileData.dob" e-name="userProfileData.dob" e-required>
+                  {{userProfileData.dob | time}}
+                </span>
+              </span>
+            </div>
+
+            <div class="item" >
+              <strong>Last Log-In</strong>
+              <span class="item-note">
+                {{userProfileData.last_login | time}} 
+              </span>
+            </div>
+
+            <div class="item" >
+              <strong>Deals Favorited</strong>
+              <span class="item-note">
+                {{dealsFavorited}} Deals
+              </span>
+            </div>
+
+            <div class="item" >
+              <strong>Deals Shared</strong>
+              <span class="item-note">
+                {{userProfileData.deal_share_count}} Deals 
+              </span>
+            </div>
+
+            <div class="item" ng-click="shareApp()">
+              <strong>App Invitation</strong>
+              <span class="item-note">
+                <a class="app-invitation-icon"><i class="icon ion-ios-telephone balanced"></i></a> 10 Friends Invited 
+              </span>
+            </div>
+
+            <div class="item edit-profile-button-block" ng-show="editableForm.$visible" >
+              <button type="submit" class="button button-block pink-white-theme-color" ng-disabled="editableForm.$waiting">
+                Save
+              </button>
+              <button type="button" class="button button-block button-light"ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                Cancel
+              </button>
+            </div>
+            <!--span ng-show="editableForm.$visible" class="edit-span">
+              <div class="item edit-profile-button-block">
+                <button type="submit" class="button button-block pink-white-theme-color" ng-disabled="editableForm.$waiting">
+                  Save
+                </button>
+                <button type="button" class="button button-block button-light"ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                  Cancel
+                </button>
+              </div>
+            </span-->
+
+          </div>
+        </form>
+    </ion-content>
+</ion-view>

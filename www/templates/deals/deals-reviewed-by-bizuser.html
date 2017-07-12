@@ -1,0 +1,47 @@
+<ion-view view-title="Deals Reviewed" hide-back-button="true" cache-view="false">
+  <ion-nav-buttons side="right">
+    <a class="button button-clear button-light" href="#/app/deals">
+      Deals     
+    </a>
+  </ion-nav-buttons>
+  <ion-content class="has-tabs" drag-content="false">
+    <ion-list >
+      <ion-item ng-repeat="deal in reviewdata"
+                class="item-thumbnail-left"
+                deal="deal">
+        
+          <img ng-src="{{dealImagePath}}{{deal.deal_id.deal_photo}}" err-src="./img/noimage2.png" ng-click="view(deal.deal_id._id)" >
+
+          <div class="single-deal-head">
+            <div class="single-deal-head-left-block">
+              <h2 ng-click="view(deal.deal_id._id)">{{deal.deal_id.deal_name}}</h2>
+              <p>by <span class="deal-owner-name">{{deal.deal_owner.first_name + ' ' + deal.deal_owner.last_name}}</span></p>
+            </div>           
+          </div>          
+          
+          <p class="deal-short-description">{{deal.deal_short_desc}}</p>
+            
+          <div class="row deal-sharing-n-review">
+            <div class="col col-55 deal-rating">
+              
+            </div>
+            <div class="col col-55 deal-sharing" >
+              <button class="button button-outline pink-white-theme-color buy-credit-button" ng-click="view(deal.deal_id._id)">
+                View
+              </button>
+            </div>
+          </div>      
+      </ion-item>
+    </ion-list>
+
+    <div class="row responsive-sm">
+      <div class="col">
+        <h1 ng-show="!reviewdata.length" class="nothing-found-block">
+          <i class="icon ion-android-alert"></i> No Deals Listed!
+        </h1>
+      </div>
+    </div>
+    
+
+  </ion-content>
+</ion-view>
